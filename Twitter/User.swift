@@ -25,6 +25,13 @@ class User: NSObject {
         if let profileImageURL = profileImageURLStr {
             self.profileURL = NSURL(string: profileImageURL)
         }
-        
     }
+    
+    class var currentUser: User? {
+        get {
+            return nil
+        }
+    }
+    
+    
 }
