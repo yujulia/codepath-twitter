@@ -18,10 +18,13 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginTapped(sender: AnyObject) {
-    
+
+        
         self.client.login({ (response: String) -> () in
                 print("login success", response);
                 self.client.verifyCredentials()
+            
+                self.performSegueWithIdentifier("loggedInSegue", sender: nil)
             
             
             }) { (error: NSError) -> () in
