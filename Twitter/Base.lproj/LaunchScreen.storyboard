@@ -16,7 +16,20 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.1793792726" green="0.50208626850000004" blue="0.59923878210000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="twitter-circle-white" translatesAutoresizingMaskIntoConstraints="NO" id="DAe-RH-oT3">
+                                <rect key="frame" x="136" y="260" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="RXq-rU-VXl"/>
+                                    <constraint firstAttribute="width" constant="48" id="VLV-u2-wFT"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.074509803920000006" green="0.60392156860000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="DAe-RH-oT3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6gn-VM-SgL"/>
+                            <constraint firstItem="DAe-RH-oT3" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Uh4-sa-4vg"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +37,7 @@
             <point key="canvasLocation" x="28.266666666666666" y="355"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="twitter-circle-white" width="48" height="48"/>
+    </resources>
 </document>

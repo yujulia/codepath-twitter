@@ -31,12 +31,18 @@
                                 <state key="normal" title="Login with Twitter">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected">
+                                    <color key="titleColor" red="0.70588235290000001" green="0.83921568629999999" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" red="0.70588235290000001" green="0.83921568629999999" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G0U-by-7ef"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.074509803921568626" green="0.60392156862745094" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.074509803920000006" green="0.60392156860000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="f1n-R3-JQk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nlz-KG-oz2"/>
                             <constraint firstItem="278-mX-cS0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rhn-Je-Fuh"/>
@@ -147,5 +153,5 @@
         <image name="minus-person" width="24" height="24"/>
         <image name="twitter-circle-white" width="48" height="48"/>
     </resources>
-    <color key="tintColor" red="0.1793792726" green="0.50208626850000004" blue="0.59923878210000003" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
