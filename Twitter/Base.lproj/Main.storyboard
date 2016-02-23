@@ -17,18 +17,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1n-R3-JQk">
-                                <rect key="frame" x="63" y="371" width="195" height="62"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="twitter-circle-white" translatesAutoresizingMaskIntoConstraints="NO" id="278-mX-cS0">
+                                <rect key="frame" x="136" y="260" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="J4S-Q4-CtH"/>
+                                    <constraint firstAttribute="height" constant="48" id="gK3-Ne-xhH"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1n-R3-JQk">
+                                <rect key="frame" x="78" y="328" width="164" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <state key="normal" title="Login with Twitter">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G0U-by-7ef"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.1793792726" green="0.50208626850000004" blue="0.59923878210000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.074509803921568626" green="0.60392156862745094" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="f1n-R3-JQk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nlz-KG-oz2"/>
+                            <constraint firstItem="278-mX-cS0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rhn-Je-Fuh"/>
+                            <constraint firstItem="f1n-R3-JQk" firstAttribute="top" secondItem="278-mX-cS0" secondAttribute="bottom" constant="20" id="mXL-hs-2nR"/>
+                            <constraint firstItem="278-mX-cS0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="wRA-Im-WkS"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="FrN-RI-1R1" kind="modal" identifier="loggedInSegue" modalTransitionStyle="flipHorizontal" id="B2u-Pq-0ao"/>
@@ -91,7 +105,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xcy-ts-YhT">
-                        <barButtonItem key="leftBarButtonItem" image="key" id="1hJ-bw-ZS6">
+                        <barButtonItem key="leftBarButtonItem" image="minus-person" id="1hJ-bw-ZS6">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="logoutTapped:" destination="oeW-SN-q3n" id="EWt-Eh-msd"/>
@@ -130,7 +144,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="key" width="24" height="24"/>
+        <image name="minus-person" width="24" height="24"/>
+        <image name="twitter-circle-white" width="48" height="48"/>
     </resources>
     <color key="tintColor" red="0.1793792726" green="0.50208626850000004" blue="0.59923878210000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>
