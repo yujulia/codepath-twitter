@@ -12,7 +12,7 @@ class Tweet: NSObject {
     
     
     
-    var tweet: NSString?
+    var text: NSString?
     var timestamp: NSDate?
     
     var retweets: Int = 0
@@ -24,7 +24,7 @@ class Tweet: NSObject {
     
     init(tweetData: NSDictionary) {
         
-        self.tweet = tweetData["text"] as? String
+        self.text = tweetData["text"] as? String
         self.retweets = (tweetData["retweet_count"] as? Int) ?? 0
         self.favorites = (tweetData["favourites_count"] as? Int) ?? 0
         

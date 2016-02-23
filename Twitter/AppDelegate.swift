@@ -52,34 +52,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             success: { (credentials: BDBOAuth1Credential!) -> Void in
                 print("got cred", credentials)
                 
-                TwitterClient.sharedInstance.GET(
-                    "1.1/account/verify_credentials.json",
-                    parameters: nil,
-                    progress: nil,
-                    success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-                        let user = response as? NSDictionary
-                        let userModel = User(userData: user!)
-                        
-                        print(userModel.name)
-                        
-                        
-                    }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-                        print(error)
-                }
+                TwitterClient.sharedInstance.verifyCredentials()
                 
-                TwitterClient.sharedInstance.GET(
-                    "1.1/statuses/home_timeline.json",
-                    parameters: nil,
-                    progress: nil,
-                    success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-                        if let allTweets = response as? [NSDictionary] {
-                            let tweets = Tweet.tweetsWithArray(allTweets)
-                            print(tweets)
+                TwitterClient.sharedInstance.homeTimeline(
+                    { (tweets: [Tweet]) -> () in
+                        for t in tweets {
+                            print(t.text)
                         }
-                    
-                    }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-                        print(error)
-                }
+                    },
+                    failure: { (error: NSError) -> () in
+                        print(error.localizedDescription)
+                    }
+                )
         
                 
             }) { (error: NSError!) -> Void in
