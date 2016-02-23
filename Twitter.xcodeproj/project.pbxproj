@@ -13,6 +13,8 @@
 		5A6C76CF1C7B88D400CD8A5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A6C76CE1C7B88D400CD8A5C /* Assets.xcassets */; };
 		5A6C76D21C7B88D400CD8A5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A6C76D01C7B88D400CD8A5C /* LaunchScreen.storyboard */; };
 		5A6C76F81C7BE42900CD8A5C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C76F71C7BE42900CD8A5C /* LoginViewController.swift */; };
+		5A6C76FD1C7C098100CD8A5C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C76FC1C7C098100CD8A5C /* User.swift */; };
+		5A6C76FF1C7C098D00CD8A5C /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C76FE1C7C098D00CD8A5C /* Tweet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		5A6C76D11C7B88D400CD8A5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A6C76D31C7B88D400CD8A5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A6C76F71C7BE42900CD8A5C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5A6C76FC1C7C098100CD8A5C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5A6C76FE1C7C098D00CD8A5C /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 		5A6C76C61C7B88D400CD8A5C /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
+				5A6C76FB1C7C096600CD8A5C /* API */,
+				5A6C76FA1C7C095C00CD8A5C /* Models */,
 				5A6C76C71C7B88D400CD8A5C /* AppDelegate.swift */,
 				5A6C76CB1C7B88D400CD8A5C /* Main.storyboard */,
 				5A6C76F91C7BE43000CD8A5C /* View Controllers */,
@@ -85,6 +91,22 @@
 				5A6C76F71C7BE42900CD8A5C /* LoginViewController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		5A6C76FA1C7C095C00CD8A5C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5A6C76FC1C7C098100CD8A5C /* User.swift */,
+				5A6C76FE1C7C098D00CD8A5C /* Tweet.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5A6C76FB1C7C096600CD8A5C /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 		7323092DF6AEA54BF644964F /* Pods */ = {
@@ -221,6 +243,8 @@
 			files = (
 				5A6C76F81C7BE42900CD8A5C /* LoginViewController.swift in Sources */,
 				5A6C76C81C7B88D400CD8A5C /* AppDelegate.swift in Sources */,
+				5A6C76FD1C7C098100CD8A5C /* User.swift in Sources */,
+				5A6C76FF1C7C098D00CD8A5C /* Tweet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

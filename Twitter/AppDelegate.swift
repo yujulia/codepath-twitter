@@ -62,7 +62,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     parameters: nil,
                     progress: nil,
                     success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-                        print("verify cred ", response)
+                        let user = response as? NSDictionary
+                        let userModel = User(userData: user!)
+                        
+                        print(userModel.name)
+                        
+                        
+                    }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                        print(error)
+                }
+                
+                twitterClient.GET(
+                    "1.1/statuses/home_timeline.json",
+                    parameters: nil,
+                    progress: nil,
+                    success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                        if let allTweets = response as? [NSDictionary] {
+                            let tweets = Tweet.tweetsWithArray(allTweets)
+                            print(tweets)
+                        }
+                    
                     }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                         print(error)
                 }
