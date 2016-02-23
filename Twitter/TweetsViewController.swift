@@ -35,6 +35,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
                 print("couldnt get tweets")
         }
     }
+    @IBAction func logoutTapped(sender: UIButton) {
+        self.client.logout()
+    }
 }
 
 // table view delegate 
@@ -51,12 +54,9 @@ extension TweetsViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        
         if let tweets = self.tweets {
-            print("table got tweets");
             return tweets.count
         } else {
-            print("no")
             return 0
         }
     }

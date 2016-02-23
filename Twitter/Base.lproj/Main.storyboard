@@ -90,7 +90,14 @@
                             <constraint firstItem="sCr-rO-SR4" firstAttribute="leading" secondItem="yrN-Mh-j71" secondAttribute="leading" id="imB-4A-thb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="xcy-ts-YhT"/>
+                    <navigationItem key="navigationItem" id="xcy-ts-YhT">
+                        <barButtonItem key="leftBarButtonItem" image="key" id="1hJ-bw-ZS6">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="logoutTapped:" destination="oeW-SN-q3n" id="EWt-Eh-msd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="sCr-rO-SR4" id="mzl-xv-g8h"/>
                     </connections>
@@ -122,5 +129,8 @@
             <point key="canvasLocation" x="541" y="299"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="key" width="24" height="24"/>
+    </resources>
     <color key="tintColor" red="0.1793792726" green="0.50208626850000004" blue="0.59923878210000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>

@@ -13,15 +13,22 @@ import BDBOAuth1Manager
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let storyBoard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    
+        
         if User.currentUser != nil {
-            print("there is a user")
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let TweetsNavController = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavController")
-            window?.rootViewController = TweetsNavController
+            let TweetsNavController = self.storyBoard.instantiateViewControllerWithIdentifier("TweetsNavController")
+            self.window?.rootViewController = TweetsNavController
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("UserDidLogout", object: nil, queue: NSOperationQueue.mainQueue()) { (note: NSNotification) -> Void in
+                let LoginViewController = self.storyBoard.instantiateInitialViewController()
+
+            
+            UIView.transitionWithView(self.window!, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: { () -> Void in
+                self.window?.rootViewController = LoginViewController
+                }, completion: nil)
         }
         
         return true

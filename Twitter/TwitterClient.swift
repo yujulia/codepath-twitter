@@ -12,6 +12,7 @@ import BDBOAuth1Manager
 private let BASE_URL = "https://api.twitter.com"
 private let CONSUMER_KEY = "tlQEQS7zcKp93aO8qfn3IOenH"
 private let CONSUMER_SECRET = "Hd5SmNqUmE09LnysMqoTWE2JMogm5yxYERBZGsA2Xbe4BDEwnJ"
+private let LOGOUT_EVENT = "UserDidLogout"
 
 class TwitterClient: BDBOAuth1SessionManager {
     
@@ -24,7 +25,16 @@ class TwitterClient: BDBOAuth1SessionManager {
     var loginSuccess: ((String) -> ())?
     var loginFailure: ((NSError) -> ())?
     
-    // ----------------------------------------- 
+    // ----------------------------------------- logout
+    
+    func logout() {
+        User.currentUser = nil
+        self.deauthorize()
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(LOGOUT_EVENT, object: nil)
+    }
+    
+    // ----------------------------------------- login
     
     func login(success: (String)->(), failure: (NSError) ->() ) {
         
