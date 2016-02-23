@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         if User.currentUser != nil {
             print("there is a user")
-        } else {
-            print("no user")
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let TweetsNavController = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavController")
+            window?.rootViewController = TweetsNavController
         }
         
         return true

@@ -41,21 +41,21 @@
         <!--Tweets View Controller-->
         <scene sceneID="mAL-Dz-rIW">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="oeW-SN-q3n" customClass="TweetsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oeW-SN-q3n" customClass="TweetsViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jvG-p9-HTS"/>
                         <viewControllerLayoutGuide type="bottom" id="BHG-3E-QoO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yrN-Mh-j71">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="69" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sCr-rO-SR4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                <color key="backgroundColor" red="0.1793792726" green="0.50208626850000004" blue="0.59923878210000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="69" id="ehc-CM-qFh" customClass="TweetCell" customModule="Twitter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="69"/>
+                                        <rect key="frame" x="0.0" y="92" width="320" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ehc-CM-qFh" id="yHU-k6-J36">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="68.5"/>
@@ -86,8 +86,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="sCr-rO-SR4" secondAttribute="trailing" id="JYy-Ze-RoC"/>
                             <constraint firstItem="BHG-3E-QoO" firstAttribute="top" secondItem="sCr-rO-SR4" secondAttribute="bottom" id="MEK-HT-fzt"/>
+                            <constraint firstItem="sCr-rO-SR4" firstAttribute="top" secondItem="yrN-Mh-j71" secondAttribute="top" id="czb-6E-IKK"/>
                             <constraint firstItem="sCr-rO-SR4" firstAttribute="leading" secondItem="yrN-Mh-j71" secondAttribute="leading" id="imB-4A-thb"/>
-                            <constraint firstItem="sCr-rO-SR4" firstAttribute="top" secondItem="jvG-p9-HTS" secondAttribute="bottom" id="nyE-kE-9hH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xcy-ts-YhT"/>
@@ -102,9 +102,9 @@
         <!--Navigation Controller-->
         <scene sceneID="NrT-Fo-kwY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FrN-RI-1R1" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="TweetsNavController" automaticallyAdjustsScrollViewInsets="NO" id="FrN-RI-1R1" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="mVc-Sh-JfU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mVc-Sh-JfU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1793792726" green="0.50208626850000004" blue="0.59923878210000003" alpha="1" colorSpace="calibratedRGB"/>
