@@ -11,9 +11,24 @@ import UIKit
 class TweetCell: UITableViewCell {
 
     @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var tweetName: UILabel!
+    @IBOutlet weak var tweetScreenName: UILabel!
+    @IBOutlet weak var tweetTime: UILabel!
+    @IBOutlet weak var retweetedIcon: UIImageView!
+    @IBOutlet weak var retweetedText: UILabel!
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+//        self.retweetedIcon.hidden = true
+//        self.retweetedText.hidden = true
+
+        
         // Initialization code
     }
 
