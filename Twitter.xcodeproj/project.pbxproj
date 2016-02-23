@@ -15,6 +15,7 @@
 		5A6C76F81C7BE42900CD8A5C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C76F71C7BE42900CD8A5C /* LoginViewController.swift */; };
 		5A6C76FD1C7C098100CD8A5C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C76FC1C7C098100CD8A5C /* User.swift */; };
 		5A6C76FF1C7C098D00CD8A5C /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C76FE1C7C098D00CD8A5C /* Tweet.swift */; };
+		5A6C77031C7C24EB00CD8A5C /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C77021C7C24EB00CD8A5C /* TwitterClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		5A6C76F71C7BE42900CD8A5C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5A6C76FC1C7C098100CD8A5C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5A6C76FE1C7C098D00CD8A5C /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		5A6C77021C7C24EB00CD8A5C /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		5A6C76FB1C7C096600CD8A5C /* API */ = {
 			isa = PBXGroup;
 			children = (
+				5A6C77021C7C24EB00CD8A5C /* TwitterClient.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A6C77031C7C24EB00CD8A5C /* TwitterClient.swift in Sources */,
 				5A6C76F81C7BE42900CD8A5C /* LoginViewController.swift in Sources */,
 				5A6C76C81C7B88D400CD8A5C /* AppDelegate.swift in Sources */,
 				5A6C76FD1C7C098100CD8A5C /* User.swift in Sources */,
