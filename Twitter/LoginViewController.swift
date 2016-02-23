@@ -22,8 +22,6 @@ class LoginViewController: UIViewController {
         
         self.client.login({ (response: String) -> () in
                 print("login success", response);
-                self.client.verifyCredentials()
-            
                 self.performSegueWithIdentifier("loggedInSegue", sender: nil)
             
             

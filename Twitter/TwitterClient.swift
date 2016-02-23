@@ -47,7 +47,6 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    
     // ----------------------------------------- 
     func handleOpenURL(url: NSURL) {
         
@@ -59,10 +58,15 @@ class TwitterClient: BDBOAuth1SessionManager {
             requestToken: requestToken,
             success: { (credentials: BDBOAuth1Credential!) -> Void in
                 
-                print("got credentails", credentials)
-                self.loginSuccess?("yeah logged in")
-                
-//                self.verifyCredentials()
+                self.verifyCredentials(
+                    { (user: User) -> () in
+                        User.currentUser = user
+                        self.loginSuccess?("ok")
+                    },
+                    failure: { (error: NSError) -> () in
+                        self.loginFailure?(error)
+                    }
+                )
 //
 //                TwitterClient.sharedInstance.homeTimeline(
 //                    { (tweets: [Tweet]) -> () in
@@ -83,20 +87,22 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     // ----------------------------------------- 
     
-    func verifyCredentials() {
+    func verifyCredentials(success: (User) -> (), failure: (NSError) -> ()) {
         self.GET(
             "1.1/account/verify_credentials.json",
             parameters: nil,
             progress: nil,
             success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-                let user = response as? NSDictionary
-                let userModel = User(userData: user!)
-                
-                print(userModel.name)
-                
+                let userDictionary = response as? NSDictionary
+                if let userDictionary = userDictionary {
+                    let user = User(userData: userDictionary)
+                    success(user)
+                } else {
+                    print("Error verifying credentials: could not get user data from Twitter")
+                }
                 
             }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-                print(error)
+                failure(error)
         }
     }
     

@@ -18,8 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
         if User.currentUser != nil {
-            // skip the login page
-        } 
+            print("there is a user")
+        } else {
+            print("no user")
+        }
         
         return true
     }
