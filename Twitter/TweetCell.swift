@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TimeAgoInWords
 
 class TweetCell: UITableViewCell {
 
@@ -15,9 +16,11 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetName: UILabel!
     @IBOutlet weak var tweetScreenName: UILabel!
     @IBOutlet weak var tweetTime: UILabel!
+    
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
+    
     @IBOutlet weak var retweetIcon: UIImageView!
     @IBOutlet weak var retweetLabel: UILabel!
     @IBOutlet weak var retweetTopConstraint: NSLayoutConstraint!
@@ -30,7 +33,18 @@ class TweetCell: UITableViewCell {
             if let imageURL = self.data?.profileImageURL {
                 self.loadProfileImage(imageURL)
             }
-            
+            if let tweetName = self.data?.name {
+                self.tweetName.text = tweetName as String
+            }
+            if let screenName = self.data?.name {
+                self.tweetScreenName.text = screenName as String
+            }
+            if let timestamp = self.data?.timestamp {
+                let now = NSDate()
+                let diff = now.timeIntervalSinceDate(timestamp)
+                let timeago = NSDate(timeIntervalSinceNow: diff).timeAgoInWords()
+                self.tweetTime.text = timeago
+            }
         }
     }
 
@@ -39,6 +53,23 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.hideRetweeted()
+        
+        let railsStrings = [
+            "LessThan": "less than ",
+            "About": "",
+            "Over": "",
+            "Almost": "",
+            "Seconds": " seconds",
+            "Minute": " minute",
+            "Minutes": " minutes",
+            "Hour": " hour",
+            "Hours": " hours",
+            "Day": " day",
+            "Days": " days",
+            "Months": " months",
+            "Years": " years",
+        ]
+        TimeAgoInWordsStrings.updateStrings(railsStrings)
     }
     
     // -------------------------------------- 
@@ -54,7 +85,6 @@ class TweetCell: UITableViewCell {
         self.retweetIcon.hidden = false
         self.retweetLabel.hidden = false
         self.retweetTopConstraint.constant = 10
-        self.retweetLabel.text = retweetedBy ?? "Retweeted by unknown"
     }
     
     // --------------------------------------
@@ -77,5 +107,4 @@ class TweetCell: UITableViewCell {
             }
         )
     }
-
 }
