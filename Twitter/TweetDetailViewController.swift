@@ -65,7 +65,7 @@ class TweetDetailViewController: UIViewController {
         if let recount = self.data?.retweets {
             self.retweetCount.text = String(recount)
         }
-        if let favcount = self.data?.retweets {
+        if let favcount = self.data?.favorites {
             self.favoriteCount.text = String(favcount)
         }
 
