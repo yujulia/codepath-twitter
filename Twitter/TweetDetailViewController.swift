@@ -53,8 +53,8 @@ class TweetDetailViewController: UIViewController {
         if let tweetName = self.data?.name {
             self.tweetName.text = tweetName as String
         }
-        if let screenName = self.data?.name {
-            self.tweetScreenName.text = screenName as String
+        if let screenName = self.data?.screenName {
+            self.tweetScreenName.text = "@\(screenName as String)"
         }
         if let timestamp = self.data?.timestamp {
             let now = NSDate()
@@ -68,7 +68,13 @@ class TweetDetailViewController: UIViewController {
         if let favcount = self.data?.favorites {
             self.favoriteCount.text = String(favcount)
         }
-
+        if let retweeted = self.data?.retweeted {
+            if retweeted {
+                if let userName = State.currentUser?.screenName {
+                    showRetweeted(String(userName))
+                }
+            }
+        }
     }
     
     // --------------------------------------
@@ -80,11 +86,11 @@ class TweetDetailViewController: UIViewController {
         self.retweetLabel.text = ""
     }
     
-    func showRetweeted(retweetedBy: String?) {
+    func showRetweeted(retweetedBy: String) {
         self.retweetIcon.hidden = false
         self.retweetLabel.hidden = false
         self.retweetTopConstraint.constant = 10
-        self.retweetLabel.text = retweetedBy
+        self.retweetLabel.text = "\(retweetedBy) Retweeted"
     }
     
     // --------------------------------------

@@ -30,6 +30,8 @@ class Tweet: NSObject {
         self.name = tweetData.valueForKeyPath("user.name") as? String
         self.screenName = tweetData.valueForKeyPath("user.screen_name") as? String
         
+        print("NAME ---- ", self.name, self.screenName)
+        
         self.retweeted = tweetData["retweeted"] as? Bool ?? false
         
         if let timestampStr = tweetData["created_at"] as? String {

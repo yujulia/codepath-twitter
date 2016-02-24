@@ -117,7 +117,7 @@
                                     <constraint firstAttribute="height" constant="30" id="wte-Bh-DA4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" red="0.67843137249999996" green="0.023529411760000001" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="write_on"/>
                                 <state key="disabled" image="write"/>
                                 <state key="selected" image="write_on"/>

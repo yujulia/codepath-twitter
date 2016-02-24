@@ -67,8 +67,8 @@ class TweetCell: UITableViewCell {
         if let tweetName = self.data?.name {
             self.tweetName.text = tweetName as String
         }
-        if let screenName = self.data?.name {
-            self.tweetScreenName.text = screenName as String
+        if let screenName = self.data?.screenName {
+            self.tweetScreenName.text = "@\(screenName as String)"
         }
         if let timestamp = self.data?.timestamp {
             let now = NSDate()
@@ -78,9 +78,10 @@ class TweetCell: UITableViewCell {
         }
         
         if let retweeted = self.data?.retweeted {
-            print("retweet", retweeted)
             if retweeted {
-                showRetweeted("someone")
+                if let userName = State.currentUser?.screenName {
+                    showRetweeted(String(userName))
+                }
             }
         }
     }
@@ -94,11 +95,11 @@ class TweetCell: UITableViewCell {
         self.retweetLabel.text = ""
     }
     
-    func showRetweeted(retweetedBy: String?) {
+    func showRetweeted(retweetedBy: String) {
         self.retweetIcon.hidden = false
         self.retweetLabel.hidden = false
         self.retweetTopConstraint.constant = 10
-        self.retweetLabel.text = retweetedBy
+        self.retweetLabel.text = "\(retweetedBy) Retweeted"
     }
     
     // --------------------------------------
