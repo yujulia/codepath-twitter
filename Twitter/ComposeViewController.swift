@@ -25,8 +25,8 @@ class ComposeViewController: UIViewController {
         
         self.composeBtn.enabled = false
         self.loadProfileImage(State.currentUser!.profileImageURL!)
-        
         self.textBox.delegate = self
+        self.charCount.text = "0"
     }
     
     // --------------------------------------
@@ -78,6 +78,7 @@ class ComposeViewController: UIViewController {
     private func closeView() {
         self.textBox.text = ""
         self.composeBtn.enabled = false
+        self.charCount.text = "0"
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -94,11 +95,20 @@ extension ComposeViewController: UITextViewDelegate {
         
         let stringLength = textView.text.characters.count
         
-        if stringLength > 0 {
+        if (stringLength > 0) && (stringLength < 140) {
             self.composeBtn.enabled = true
+            self.charCount.textColor = UIColor.darkGrayColor()
+            self.charCount.text = String(stringLength)
         } else {
             self.composeBtn.enabled = false
         }
+        
+        if stringLength > 140 {
+            print("too big")
+            self.charCount.textColor = UIColor.redColor()
+            self.charCount.text = String(140 - stringLength)
+        }
+        
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
