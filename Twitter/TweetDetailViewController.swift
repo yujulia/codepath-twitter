@@ -10,20 +10,17 @@ import UIKit
 
 class TweetDetailViewController: UIViewController {
     
-    @IBOutlet weak var retweetIcon: UIImageView!
-    @IBOutlet weak var retweetLabel: UILabel!
-    @IBOutlet weak var profileImage: UIImageView!
-    
-    @IBOutlet weak var tweetName: UILabel!
-    @IBOutlet weak var tweetScreenName: UILabel!
-    @IBOutlet weak var tweetText: UILabel!
-    
+
+
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var tweet: Tweet?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+        
         // Do any additional setup after loading the view.
     }
 
