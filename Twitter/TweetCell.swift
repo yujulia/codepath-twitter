@@ -81,11 +81,11 @@ class TweetCell: UITableViewCell {
         self.retweetLabel.text = ""
     }
     
-    func showRetweeted(retweetedBy: String?) {
-        self.retweetIcon.hidden = false
-        self.retweetLabel.hidden = false
-        self.retweetTopConstraint.constant = 10
-    }
+//    func showRetweeted(retweetedBy: String?) {
+//        self.retweetIcon.hidden = false
+//        self.retweetLabel.hidden = false
+//        self.retweetTopConstraint.constant = 10
+//    }
     
     // --------------------------------------
     
@@ -103,6 +103,7 @@ class TweetCell: UITableViewCell {
                 )
             },
             failure: { (error: NSError) -> () in
+                self.profileImage.image = UIImage(named: "default")
                 print("image load failure for profileImageURL: ", error.localizedDescription)
             }
         )
