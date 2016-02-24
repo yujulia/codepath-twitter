@@ -21,6 +21,18 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetIcon: UIImageView!
     @IBOutlet weak var retweetLabel: UILabel!
     @IBOutlet weak var retweetTopConstraint: NSLayoutConstraint!
+    
+    var data: Tweet? {
+        didSet {
+            if let tweetText = self.data?.text {
+                self.tweetTextLabel.text = tweetText as String
+            }
+            if let imageURL = self.data?.profileImageURL {
+                self.loadProfileImage(imageURL)
+            }
+            
+        }
+    }
 
     // --------------------------------------
     
@@ -44,26 +56,24 @@ class TweetCell: UITableViewCell {
         self.retweetTopConstraint.constant = 10
         self.retweetLabel.text = retweetedBy ?? "Retweeted by unknown"
     }
-
-    // -------------------------------------- 
-    
-    func setLabelText(tweetText: String){
-        tweetTextLabel.text = tweetText
-    }
     
     // --------------------------------------
     
     func loadProfileImage(profileImageURL: NSURL) {
-        print("loading tweet profile image", profileImageURL)
+        self.profileImage.alpha = 0
         
         ImageLoader.loadImage(
             profileImageURL,
             imageview: self.profileImage,
             success: { () -> () in
-                    print("image set success")
+                UIView.animateWithDuration(0.3,
+                    animations:  {() in
+                        self.profileImage.alpha = 1
+                    }
+                )
             },
             failure: { (error: NSError) -> () in
-                print("image failure: ", error.localizedDescription)
+                print("image load failure for profileImageURL: ", error.localizedDescription)
             }
         )
     }
