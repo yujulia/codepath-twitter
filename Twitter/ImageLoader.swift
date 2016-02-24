@@ -11,27 +11,31 @@ import AFNetworking
 
 class ImageLoader {
     
-    static func loadImage(urlString: String, imageview: UIImageView) {
-        ImageLoader.loadImage(urlString, imageview: imageview, callback:nil)
+    // -------------------------------------- 
+    
+    static func loadImage(url: NSURL, imageview: UIImageView) {
+        ImageLoader.loadImage(url, imageview: imageview, success:nil, failure:nil)
     }
     
-    static func loadImage(urlString: String, imageview: UIImageView, callback: (()->Void)?) {
+    // --------------------------------------
+    
+    static func loadImage(
+        url: NSURL,
+        imageview: UIImageView,
+        success: (()-> Void)?,
+        failure: ((error: NSError)-> Void)?
+        ) {
         
-        if let url = NSURL(string:urlString) {
-            let urlRequest = NSURLRequest(URL: url)
-            
-            imageview.setImageWithURLRequest(
-                urlRequest,
-                placeholderImage: nil,
-                success: {(req: NSURLRequest, response: NSURLResponse?, image: UIImage) -> Void in
-                    
-                    imageview.image = image
-                    if let callback = callback {
-                        callback()
-                    }
-                },
-                failure: nil
-            )
-        }
+        let urlRequest = NSURLRequest(URL: url)
+
+        imageview.setImageWithURLRequest(
+            urlRequest,
+            placeholderImage: nil,
+            success: { (req: NSURLRequest, response: NSHTTPURLResponse?, image: UIImage) -> Void in
+                imageview.image = image
+                success?()
+            }) { (req: NSURLRequest, response: NSHTTPURLResponse?, error: NSError) -> Void in
+                failure?(error: error)
+            }
     }
 }

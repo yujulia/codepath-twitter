@@ -50,5 +50,22 @@ class TweetCell: UITableViewCell {
     func setLabelText(tweetText: String){
         tweetTextLabel.text = tweetText
     }
+    
+    // --------------------------------------
+    
+    func loadProfileImage(profileImageURL: NSURL) {
+        print("loading tweet profile image", profileImageURL)
+        
+        ImageLoader.loadImage(
+            profileImageURL,
+            imageview: self.profileImage,
+            success: { () -> () in
+                    print("image set success")
+            },
+            failure: { (error: NSError) -> () in
+                print("image failure: ", error.localizedDescription)
+            }
+        )
+    }
 
 }

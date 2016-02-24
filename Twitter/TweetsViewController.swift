@@ -76,9 +76,18 @@ extension TweetsViewController: UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         
-        cell.setLabelText(self.tweets![indexPath.row].text as! String)
-        
-        
+        if let cellData = self.tweets?[indexPath.row] {
+            
+            print(cellData.profileImageURL)
+            
+            if let cellDataText = cellData.text {
+                cell.setLabelText(cellDataText as String)
+            }
+            if let cellDataURL = cellData.profileImageURL {
+                cell.loadProfileImage(cellDataURL)
+            }
+        }
+    
         return cell
     }
 }

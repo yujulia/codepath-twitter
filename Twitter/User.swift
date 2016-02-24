@@ -15,9 +15,8 @@ class User: NSObject {
     var name: NSString?
     var screenName: NSString?
     var tagline: NSString?
-    var profileURL: NSURL?
+    var profileImageURL: NSURL?
     var userData: NSDictionary?
-    
     
     init(userData: NSDictionary) {
         
@@ -28,7 +27,7 @@ class User: NSObject {
         
         let profileImageURLStr = userData["profile_image_url"] as? String
         if let profileImageURL = profileImageURLStr {
-            self.profileURL = NSURL(string: profileImageURL)
+            self.profileImageURL = NSURL(string: profileImageURL)
         }
     }
     
