@@ -43,6 +43,16 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     @IBAction func logoutTapped(sender: UIButton) {
         self.client.logout()
     }
+    
+    // -------------------------------------- logout
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "TweetDetailSegue" {
+            
+        }
+        
+    }
 }
 
 // table view delegate 

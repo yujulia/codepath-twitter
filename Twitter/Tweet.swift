@@ -17,6 +17,7 @@ class Tweet: NSObject {
     var retweets: Int = 0
     var favorites: Int = 0
     var profileImageURL: NSURL?
+    var retweeted: Bool?
     
     init(tweetData: NSDictionary) {
         
@@ -27,6 +28,7 @@ class Tweet: NSObject {
         self.favorites = (tweetData["favourites_count"] as? Int) ?? 0
         self.name = tweetData.valueForKeyPath("user.name") as? String
         self.screenName = tweetData.valueForKeyPath("user.screen_name") as? String
+        self.retweeted = tweetData["retweeted"] as? Bool ?? false
         
         if let timestampStr = tweetData["created_at"] as? String {
             let dateFormatter = NSDateFormatter()
