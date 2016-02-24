@@ -19,7 +19,7 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loadProfileImage(User.currentUser!.profileImageURL!)
+        self.loadProfileImage(State.currentUser!.profileImageURL!)
     }
     
     // --------------------------------------
@@ -63,5 +63,27 @@ class ComposeViewController: UIViewController {
 
     @IBAction func xClick(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+extension ComposeViewController: UITextViewDelegate {
+    
+    func textViewDidChange(textView: UITextView) {
+        
+        let stringLength = textView.text.characters.count
+        
+        if stringLength > 0 {
+            // turn on button
+        } else {
+            // turn off button
+        }
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        //
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        //
     }
 }

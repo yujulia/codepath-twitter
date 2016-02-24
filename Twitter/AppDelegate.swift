@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        if User.currentUser != nil {
+        if State.currentUser != nil {
             let TweetsNavController = self.storyBoard.instantiateViewControllerWithIdentifier("TweetsNavController")
             self.window?.rootViewController = TweetsNavController
         }

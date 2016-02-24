@@ -28,7 +28,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     // ----------------------------------------- logout
     
     func logout() {
-        User.currentUser = nil
+        State.currentUser = nil
         self.deauthorize()
         
         NSNotificationCenter.defaultCenter().postNotificationName(LOGOUT_EVENT, object: nil)
@@ -70,7 +70,7 @@ class TwitterClient: BDBOAuth1SessionManager {
                 
                 self.verifyCredentials(
                     { (user: User) -> () in
-                        User.currentUser = user
+                        State.currentUser = user
                         self.loginSuccess?("ok")
                     },
                     failure: { (error: NSError) -> () in
