@@ -11,33 +11,104 @@ import UIKit
 class TweetDetailViewController: UIViewController {
     
 
-
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var tweet: Tweet?
+    @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var tweetName: UILabel!
+    @IBOutlet weak var tweetScreenName: UILabel!
+    @IBOutlet weak var tweetTime: UILabel!
+    
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
+    @IBOutlet weak var retweetIcon: UIImageView!
+    @IBOutlet weak var retweetLabel: UILabel!
+    @IBOutlet weak var retweetTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var retweetCount: UILabel!
+    @IBOutlet weak var favoriteCount: UILabel!
+    
+    var data: Tweet?
 
+    // --------------------------------------
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
-        
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.setDataAsProperty()
     }
     
+    // --------------------------------------
+    
+    private func setDataAsProperty() {
+        if let tweetText = self.data?.text {
+            self.tweetTextLabel.text = tweetText as String
+        }
+        if let imageURL = self.data?.profileImageURL {
+            self.loadProfileImage(imageURL)
+        }
+        if let tweetName = self.data?.name {
+            self.tweetName.text = tweetName as String
+        }
+        if let screenName = self.data?.name {
+            self.tweetScreenName.text = screenName as String
+        }
+        if let timestamp = self.data?.timestamp {
+            let now = NSDate()
+            let diff = now.timeIntervalSinceDate(timestamp)
+            let timeago = NSDate(timeIntervalSinceNow: diff).timeAgoInWords()
+            self.tweetTime.text = timeago
+        }
+        if let recount = self.data?.retweets {
+            self.retweetCount.text = String(recount)
+        }
+        if let favcount = self.data?.retweets {
+            self.favoriteCount.text = String(favcount)
+        }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
+    
+    // --------------------------------------
+    
+    func hideRetweeted() {
+        self.retweetIcon.hidden = true
+        self.retweetLabel.hidden = true
+        self.retweetTopConstraint.constant = 0
+        self.retweetLabel.text = ""
+    }
+    
+    func showRetweeted(retweetedBy: String?) {
+        self.retweetIcon.hidden = false
+        self.retweetLabel.hidden = false
+        self.retweetTopConstraint.constant = 10
+        self.retweetLabel.text = retweetedBy
+    }
+    
+    // --------------------------------------
+    
+    func loadProfileImage(profileImageURL: NSURL) {
+        self.profileImage.alpha = 0
+        
+        ImageLoader.loadImage(
+            profileImageURL,
+            imageview: self.profileImage,
+            success: { () -> () in
+                UIView.animateWithDuration(0.3,
+                    animations:  {() in
+                        self.profileImage.alpha = 1
+                    }
+                )
+            },
+            failure: { (error: NSError) -> () in
+                self.profileImage.image = UIImage(named: "default")
+                print("image load failure for profileImageURL: ", error.localizedDescription)
+            }
+        )
+    }
+
+
 
 }

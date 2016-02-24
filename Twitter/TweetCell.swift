@@ -9,6 +9,22 @@
 import UIKit
 import TimeAgoInWords
 
+let railsStrings = [
+    "LessThan": "less than ",
+    "About": "",
+    "Over": "",
+    "Almost": "",
+    "Seconds": " seconds",
+    "Minute": " minute",
+    "Minutes": " minutes",
+    "Hour": " hour",
+    "Hours": " hours",
+    "Day": " day",
+    "Days": " days",
+    "Months": " months",
+    "Years": " years",
+]
+
 class TweetCell: UITableViewCell {
 
     @IBOutlet weak var tweetTextLabel: UILabel!
@@ -27,24 +43,7 @@ class TweetCell: UITableViewCell {
     
     var data: Tweet? {
         didSet {
-            if let tweetText = self.data?.text {
-                self.tweetTextLabel.text = tweetText as String
-            }
-            if let imageURL = self.data?.profileImageURL {
-                self.loadProfileImage(imageURL)
-            }
-            if let tweetName = self.data?.name {
-                self.tweetName.text = tweetName as String
-            }
-            if let screenName = self.data?.name {
-                self.tweetScreenName.text = screenName as String
-            }
-            if let timestamp = self.data?.timestamp {
-                let now = NSDate()
-                let diff = now.timeIntervalSinceDate(timestamp)
-                let timeago = NSDate(timeIntervalSinceNow: diff).timeAgoInWords()
-                self.tweetTime.text = timeago
-            }
+            self.setDataAsProperty()
         }
     }
 
@@ -53,23 +52,37 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.hideRetweeted()
-        
-        let railsStrings = [
-            "LessThan": "less than ",
-            "About": "",
-            "Over": "",
-            "Almost": "",
-            "Seconds": " seconds",
-            "Minute": " minute",
-            "Minutes": " minutes",
-            "Hour": " hour",
-            "Hours": " hours",
-            "Day": " day",
-            "Days": " days",
-            "Months": " months",
-            "Years": " years",
-        ]
         TimeAgoInWordsStrings.updateStrings(railsStrings)
+    }
+    
+    // -------------------------------------- put the data in our view
+    
+    private func setDataAsProperty() {
+        if let tweetText = self.data?.text {
+            self.tweetTextLabel.text = tweetText as String
+        }
+        if let imageURL = self.data?.profileImageURL {
+            self.loadProfileImage(imageURL)
+        }
+        if let tweetName = self.data?.name {
+            self.tweetName.text = tweetName as String
+        }
+        if let screenName = self.data?.name {
+            self.tweetScreenName.text = screenName as String
+        }
+        if let timestamp = self.data?.timestamp {
+            let now = NSDate()
+            let diff = now.timeIntervalSinceDate(timestamp)
+            let timeago = NSDate(timeIntervalSinceNow: diff).timeAgoInWords()
+            self.tweetTime.text = timeago
+        }
+        
+        if let retweeted = self.data?.retweeted {
+            print("retweet", retweeted)
+            if retweeted {
+                showRetweeted("someone")
+            }
+        }
     }
     
     // -------------------------------------- 
@@ -81,11 +94,12 @@ class TweetCell: UITableViewCell {
         self.retweetLabel.text = ""
     }
     
-//    func showRetweeted(retweetedBy: String?) {
-//        self.retweetIcon.hidden = false
-//        self.retweetLabel.hidden = false
-//        self.retweetTopConstraint.constant = 10
-//    }
+    func showRetweeted(retweetedBy: String?) {
+        self.retweetIcon.hidden = false
+        self.retweetLabel.hidden = false
+        self.retweetTopConstraint.constant = 10
+        self.retweetLabel.text = retweetedBy
+    }
     
     // --------------------------------------
     

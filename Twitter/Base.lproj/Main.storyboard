@@ -412,7 +412,20 @@
                         <barButtonItem key="rightBarButtonItem" title="Reply" id="AVB-Kq-Dj5"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="favoriteButton" destination="4bR-5W-Jez" id="lko-Vp-6Fc"/>
+                        <outlet property="favoriteCount" destination="fxj-eK-S3M" id="iBb-r0-Lre"/>
+                        <outlet property="profileImage" destination="0IQ-vL-ANE" id="zPS-Sf-nPo"/>
+                        <outlet property="replyButton" destination="dQW-uD-Sif" id="cbC-Ok-OX1"/>
+                        <outlet property="retweetButton" destination="7zC-ME-C4a" id="G8M-SI-Ao9"/>
+                        <outlet property="retweetCount" destination="moY-3l-Zv2" id="bqh-mX-9vq"/>
+                        <outlet property="retweetIcon" destination="kfx-68-Fxi" id="G7v-gm-rrd"/>
+                        <outlet property="retweetLabel" destination="pKs-db-IJ9" id="RPi-bs-Wgx"/>
+                        <outlet property="retweetTopConstraint" destination="66E-TN-gOP" id="FJG-GZ-ptl"/>
                         <outlet property="scrollView" destination="fmS-ri-ZLZ" id="SQl-PP-F4f"/>
+                        <outlet property="tweetName" destination="uB6-eE-fM8" id="0lT-X5-dxI"/>
+                        <outlet property="tweetScreenName" destination="WBs-yl-lNa" id="rgp-kB-6rc"/>
+                        <outlet property="tweetTextLabel" destination="Qva-Ly-FV2" id="69M-Gf-Zat"/>
+                        <outlet property="tweetTime" destination="KzL-rh-zPo" id="tY8-gp-BsU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EKG-17-kcj" userLabel="First Responder" sceneMemberID="firstResponder"/>

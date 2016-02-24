@@ -20,14 +20,15 @@ class Tweet: NSObject {
     var retweeted: Bool?
     
     init(tweetData: NSDictionary) {
-        
-        print(tweetData["user"])
+        print(tweetData)
         
         self.text = tweetData["text"] as? String
         self.retweets = (tweetData["retweet_count"] as? Int) ?? 0
         self.favorites = (tweetData["favourites_count"] as? Int) ?? 0
         self.name = tweetData.valueForKeyPath("user.name") as? String
         self.screenName = tweetData.valueForKeyPath("user.screen_name") as? String
+        
+        
         self.retweeted = tweetData["retweeted"] as? Bool ?? false
         
         if let timestampStr = tweetData["created_at"] as? String {

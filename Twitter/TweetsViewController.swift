@@ -49,7 +49,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "TweetDetailSegue" {
+            let detailViewController = segue.destinationViewController as! TweetDetailViewController
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
             
+            detailViewController.data = self.tweets?[indexPath!.row]
         }
         
     }
