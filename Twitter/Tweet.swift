@@ -24,10 +24,9 @@ class Tweet: NSObject {
         
         self.text = tweetData["text"] as? String
         self.retweets = (tweetData["retweet_count"] as? Int) ?? 0
-        self.favorites = (tweetData["favourites_count"] as? Int) ?? 0
+        self.favorites = (tweetData["favorite_count"] as? Int) ?? 0
         self.name = tweetData.valueForKeyPath("user.name") as? String
         self.screenName = tweetData.valueForKeyPath("user.screen_name") as? String
-        
         
         self.retweeted = tweetData["retweeted"] as? Bool ?? false
         
@@ -41,8 +40,6 @@ class Tweet: NSObject {
         if let profileImageURL = profileImageURLStr {
             self.profileImageURL = NSURL(string: profileImageURL)
         }
-        
-        
     }
     
     class func tweetsWithArray(tweetsArray: [NSDictionary]) -> [Tweet] {

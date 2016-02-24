@@ -59,6 +59,87 @@
             </objects>
             <point key="canvasLocation" x="130" y="299"/>
         </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="zCc-si-MgZ">
+            <objects>
+                <viewController id="Y70-oQ-fN0" customClass="ComposeViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CWK-Ji-mOi"/>
+                        <viewControllerLayoutGuide type="bottom" id="gxk-n7-02k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ONo-C6-hII">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttm-KM-vOE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0B-RL-kva">
+                                        <rect key="frame" x="280" y="34" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="euX-6G-cFF"/>
+                                            <constraint firstAttribute="height" constant="20" id="uLf-LS-PDG"/>
+                                        </constraints>
+                                        <state key="normal" image="close"/>
+                                        <connections>
+                                            <action selector="xClick:" destination="Y70-oQ-fN0" eventType="touchUpInside" id="8gO-YT-cLJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="k0B-RL-kva" secondAttribute="trailing" constant="20" id="LVQ-OP-dZn"/>
+                                    <constraint firstAttribute="height" constant="64" id="Ncj-lD-jbP"/>
+                                    <constraint firstAttribute="bottom" secondItem="k0B-RL-kva" secondAttribute="bottom" constant="10" id="kqf-wH-Qf4"/>
+                                </constraints>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's Happening?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-cv-bXj">
+                                <rect key="frame" x="20" y="84" width="280" height="200"/>
+                                <color key="backgroundColor" red="0.83921568629999999" green="0.91764705879999997" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="E8s-vT-9l0"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="DHb-sG-ofJ">
+                                <rect key="frame" x="235" y="294" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Lsb-JD-tyI"/>
+                                    <constraint firstAttribute="height" constant="30" id="N2x-qA-hkq"/>
+                                </constraints>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="write" translatesAutoresizingMaskIntoConstraints="NO" id="LC6-Ar-hUp">
+                                <rect key="frame" x="270" y="294" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="GPc-Oa-vVm"/>
+                                    <constraint firstAttribute="height" constant="30" id="StF-0E-YLv"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="KmT-cv-bXj" firstAttribute="top" secondItem="ttm-KM-vOE" secondAttribute="bottom" constant="20" id="1Y3-6G-dT9"/>
+                            <constraint firstItem="DHb-sG-ofJ" firstAttribute="top" secondItem="KmT-cv-bXj" secondAttribute="bottom" constant="10" id="37Q-hG-1S3"/>
+                            <constraint firstItem="LC6-Ar-hUp" firstAttribute="bottom" secondItem="DHb-sG-ofJ" secondAttribute="bottom" id="9Jl-7d-rCj"/>
+                            <constraint firstAttribute="trailing" secondItem="KmT-cv-bXj" secondAttribute="trailing" constant="20" id="EUc-Hv-80a"/>
+                            <constraint firstAttribute="trailing" secondItem="ttm-KM-vOE" secondAttribute="trailing" id="FpG-49-EDN"/>
+                            <constraint firstItem="ttm-KM-vOE" firstAttribute="leading" secondItem="ONo-C6-hII" secondAttribute="leading" id="Gbc-12-kDd"/>
+                            <constraint firstItem="LC6-Ar-hUp" firstAttribute="leading" secondItem="DHb-sG-ofJ" secondAttribute="trailing" constant="5" id="dhH-rj-EFz"/>
+                            <constraint firstItem="ttm-KM-vOE" firstAttribute="top" secondItem="ONo-C6-hII" secondAttribute="top" id="heo-Ry-DuZ"/>
+                            <constraint firstAttribute="trailing" secondItem="LC6-Ar-hUp" secondAttribute="trailing" constant="20" id="iRp-4x-YlC"/>
+                            <constraint firstItem="KmT-cv-bXj" firstAttribute="leading" secondItem="ONo-C6-hII" secondAttribute="leading" constant="20" id="vS8-Us-oYH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="profileImage" destination="DHb-sG-ofJ" id="UDp-xn-1uk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J3I-sO-RlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1073" y="-389"/>
+        </scene>
         <!--Timeline-->
         <scene sceneID="mAL-Dz-rIW">
             <objects>
@@ -87,8 +168,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="9tT-gC-qwL"/>
                                                         <constraint firstAttribute="width" constant="50" id="VIg-Lk-0Vh"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="sgq-Id-t9x"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="vey-VU-qe7"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9D-Vf-lDs">
@@ -225,7 +304,11 @@
                                 <action selector="logoutTapped:" destination="oeW-SN-q3n" id="EWt-Eh-msd"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="quill" id="hjR-TF-3Ad"/>
+                        <barButtonItem key="rightBarButtonItem" image="quill" id="hjR-TF-3Ad">
+                            <connections>
+                                <segue destination="Y70-oQ-fN0" kind="modal" identifier="ComposeSegue" id="l3l-Zs-sYR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -409,7 +492,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pSY-wR-4PZ">
-                        <barButtonItem key="rightBarButtonItem" title="Reply" id="AVB-Kq-Dj5"/>
+                        <barButtonItem key="rightBarButtonItem" title="Reply" id="AVB-Kq-Dj5">
+                            <inset key="imageInsets" minX="20" minY="10" maxX="0.0" maxY="20"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="favoriteButton" destination="4bR-5W-Jez" id="lko-Vp-6Fc"/>
@@ -457,6 +542,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="close" width="48" height="48"/>
         <image name="default" width="400" height="400"/>
         <image name="like-action" width="54" height="72"/>
         <image name="minus-person" width="24" height="24"/>
@@ -464,6 +550,7 @@
         <image name="reply-action_0" width="65" height="72"/>
         <image name="retweet-action" width="75" height="72"/>
         <image name="twitter-circle-white" width="48" height="48"/>
+        <image name="write" width="48" height="48"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

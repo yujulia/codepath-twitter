@@ -119,6 +119,7 @@ class TweetCell: UITableViewCell {
             failure: { (error: NSError) -> () in
                 self.profileImage.image = UIImage(named: "default")
                 print("image load failure for profileImageURL: ", error.localizedDescription)
+                self.profileImage.alpha = 1
             }
         )
     }
