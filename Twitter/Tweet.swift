@@ -19,6 +19,8 @@ class Tweet: NSObject {
     var profileImageURL: NSURL?
     var retweeted: Bool?
     
+    // -------------------------------------- 
+    
     init(tweetData: NSDictionary) {
         print(tweetData)
         
@@ -41,6 +43,8 @@ class Tweet: NSObject {
             self.profileImageURL = NSURL(string: profileImageURL)
         }
     }
+    
+    // --------------------------------------
     
     class func tweetsWithArray(tweetsArray: [NSDictionary]) -> [Tweet] {
         var tweets = [Tweet]()

@@ -58,6 +58,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     // ----------------------------------------- 
+    
     func handleOpenURL(url: NSURL) {
         
         let requestToken = BDBOAuth1Credential(queryString: url.query)

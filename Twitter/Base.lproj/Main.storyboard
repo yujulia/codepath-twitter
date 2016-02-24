@@ -93,7 +93,7 @@
                                     <constraint firstAttribute="bottom" secondItem="k0B-RL-kva" secondAttribute="bottom" constant="10" id="kqf-wH-Qf4"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's Happening?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-cv-bXj">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-cv-bXj">
                                 <rect key="frame" x="20" y="84" width="280" height="200"/>
                                 <color key="backgroundColor" red="0.83921568629999999" green="0.91764705879999997" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -117,9 +117,13 @@
                                     <constraint firstAttribute="height" constant="30" id="wte-Bh-DA4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="write">
+                                <state key="normal" image="write_on">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="disabled" image="write"/>
+                                <state key="selected" image="write_on"/>
+                                <state key="highlighted" image="write_on"/>
+                                <state key="focused" image="write_on"/>
                                 <connections>
                                     <action selector="onTweet:" destination="Y70-oQ-fN0" eventType="touchUpInside" id="8Ii-I6-PaA"/>
                                 </connections>
@@ -153,6 +157,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="charCount" destination="7p0-Kh-MbL" id="ukO-aQ-0CL"/>
+                        <outlet property="composeBtn" destination="0A6-XY-YZg" id="EsP-u9-GjS"/>
                         <outlet property="profileImage" destination="DHb-sG-ofJ" id="UDp-xn-1uk"/>
                         <outlet property="textBox" destination="KmT-cv-bXj" id="AU9-vk-puu"/>
                     </connections>
@@ -572,6 +577,7 @@
         <image name="retweet-action" width="75" height="72"/>
         <image name="twitter-circle-white" width="48" height="48"/>
         <image name="write" width="48" height="48"/>
+        <image name="write_on" width="48" height="48"/>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

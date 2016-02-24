@@ -11,15 +11,22 @@ import UIKit
 class ComposeViewController: UIViewController {
     
     let client = TwitterClient.sharedInstance
+    let placeholder = "What's Happening?"
     
+    @IBOutlet weak var composeBtn: UIButton!
     @IBOutlet weak var textBox: UITextView!
     @IBOutlet weak var charCount: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
+    
+    // --------------------------------------
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.composeBtn.enabled = false
         self.loadProfileImage(State.currentUser!.profileImageURL!)
+        
+        self.textBox.delegate = self
     }
     
     // --------------------------------------
@@ -49,20 +56,35 @@ class ComposeViewController: UIViewController {
     
     @IBAction func onTweet(sender: AnyObject) {
         
+        // nothing to post
+        
+        if !self.composeBtn.enabled {
+            return
+        }
+        
+        // something to post
+        
         self.client.postTweet(
             self.textBox.text,
             success: { () -> () in
-                print("twitted");
+                self.closeView()
             }) { (error: NSError) -> () in
                 print("post tweet error: ", error.localizedDescription)
         }
-        
+    }
+    
+    // --------------------------------------
+    
+    private func closeView() {
+        self.textBox.text = ""
+        self.composeBtn.enabled = false
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // --------------------------------------
 
     @IBAction func xClick(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.closeView()
     }
 }
 
@@ -73,17 +95,19 @@ extension ComposeViewController: UITextViewDelegate {
         let stringLength = textView.text.characters.count
         
         if stringLength > 0 {
-            // turn on button
+            self.composeBtn.enabled = true
         } else {
-            // turn off button
+            self.composeBtn.enabled = false
         }
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
         //
+        print("begin edit")
     }
     
     func textViewDidEndEditing(textView: UITextView) {
         //
+        print("end edit")
     }
 }

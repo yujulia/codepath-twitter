@@ -16,6 +16,8 @@ class User: NSObject {
     var profileImageURL: NSURL?
     var userData: NSDictionary?
     
+    // -------------------------------------- 
+    
     init(userData: NSDictionary) {
         
         self.userData = userData
