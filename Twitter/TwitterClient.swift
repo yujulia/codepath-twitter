@@ -76,19 +76,7 @@ class TwitterClient: BDBOAuth1SessionManager {
                     failure: { (error: NSError) -> () in
                         self.loginFailure?(error)
                     }
-                )
-//
-//                TwitterClient.sharedInstance.homeTimeline(
-//                    { (tweets: [Tweet]) -> () in
-//                        for t in tweets {
-//                            print(t.text)
-//                        }
-//                    },
-//                    failure: { (error: NSError) -> () in
-//                        print(error.localizedDescription)
-//                    }
-//                )
-//                
+                )   
                 
             }) { (error: NSError!) -> Void in
                 print(error.localizedDescription)

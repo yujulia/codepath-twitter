@@ -18,23 +18,28 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     
     var tweets: [Tweet]?
     
+    // --------------------------------------
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTable()
-
+        self.loadTimeline()
+    }
+    
+    // -------------------------------------- load the timeline
+    
+    private func loadTimeline() {
         client.homeTimeline({ (tweetArray: [Tweet]) -> () in
-            
             self.tweets = tweetArray
-            
-            print("got", self.tweets?.count, " tweets")
-//            print("got tweets", self.tweets)
-            
             self.tableView.reloadData()
             
             }) { (error: NSError) -> () in
-                print("couldnt get tweets")
+                print("couldnt get tweets", error.localizedDescription)
         }
     }
+    
+    // -------------------------------------- logout
+    
     @IBAction func logoutTapped(sender: UIButton) {
         self.client.logout()
     }
@@ -44,6 +49,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
 
 extension TweetsViewController: UITableViewDelegate {
     
+    // --------------------------------------
+    
     private func setupTable() {
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -51,6 +58,8 @@ extension TweetsViewController: UITableViewDelegate {
         self.tableView.estimatedRowHeight = ESTIMATE_ROW_HEIGHT
         self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
     }
+    
+    // --------------------------------------
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -61,11 +70,14 @@ extension TweetsViewController: UITableViewDelegate {
         }
     }
     
+    // --------------------------------------
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         
         cell.setLabelText(self.tweets![indexPath.row].text as! String)
+        
         
         return cell
     }

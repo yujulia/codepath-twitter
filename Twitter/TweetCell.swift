@@ -15,28 +15,37 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetName: UILabel!
     @IBOutlet weak var tweetScreenName: UILabel!
     @IBOutlet weak var tweetTime: UILabel!
-    @IBOutlet weak var retweetedIcon: UIImageView!
-    @IBOutlet weak var retweetedText: UILabel!
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var retweetIcon: UIImageView!
+    @IBOutlet weak var retweetLabel: UILabel!
+    @IBOutlet weak var retweetTopConstraint: NSLayoutConstraint!
 
+    // --------------------------------------
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-//        self.retweetedIcon.hidden = true
-//        self.retweetedText.hidden = true
-
-        
-        // Initialization code
+        self.hideRetweeted()
+    }
+    
+    // -------------------------------------- 
+    
+    func hideRetweeted() {
+        self.retweetIcon.hidden = true
+        self.retweetLabel.hidden = true
+        self.retweetTopConstraint.constant = 0
+        self.retweetLabel.text = ""
+    }
+    
+    func showRetweeted(retweetedBy: String?) {
+        self.retweetIcon.hidden = false
+        self.retweetLabel.hidden = false
+        self.retweetTopConstraint.constant = 10
+        self.retweetLabel.text = retweetedBy ?? "Retweeted by unknown"
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    // -------------------------------------- 
     
     func setLabelText(tweetText: String){
         tweetTextLabel.text = tweetText
