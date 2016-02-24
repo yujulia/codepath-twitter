@@ -104,36 +104,57 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="DHb-sG-ofJ">
-                                <rect key="frame" x="235" y="294" width="30" height="30"/>
+                                <rect key="frame" x="20" y="294" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Lsb-JD-tyI"/>
                                     <constraint firstAttribute="height" constant="30" id="N2x-qA-hkq"/>
                                 </constraints>
                             </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="write" translatesAutoresizingMaskIntoConstraints="NO" id="LC6-Ar-hUp">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0A6-XY-YZg">
                                 <rect key="frame" x="270" y="294" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="GPc-Oa-vVm"/>
-                                    <constraint firstAttribute="height" constant="30" id="StF-0E-YLv"/>
+                                    <constraint firstAttribute="width" constant="30" id="an1-tR-YKx"/>
+                                    <constraint firstAttribute="height" constant="30" id="wte-Bh-DA4"/>
                                 </constraints>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="write">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onTweet:" destination="Y70-oQ-fN0" eventType="touchUpInside" id="8Ii-I6-PaA"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7p0-Kh-MbL">
+                                <rect key="frame" x="58" y="308" width="23" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="KmT-cv-bXj" firstAttribute="top" secondItem="ttm-KM-vOE" secondAttribute="bottom" constant="20" id="1Y3-6G-dT9"/>
                             <constraint firstItem="DHb-sG-ofJ" firstAttribute="top" secondItem="KmT-cv-bXj" secondAttribute="bottom" constant="10" id="37Q-hG-1S3"/>
-                            <constraint firstItem="LC6-Ar-hUp" firstAttribute="bottom" secondItem="DHb-sG-ofJ" secondAttribute="bottom" id="9Jl-7d-rCj"/>
                             <constraint firstAttribute="trailing" secondItem="KmT-cv-bXj" secondAttribute="trailing" constant="20" id="EUc-Hv-80a"/>
                             <constraint firstAttribute="trailing" secondItem="ttm-KM-vOE" secondAttribute="trailing" id="FpG-49-EDN"/>
                             <constraint firstItem="ttm-KM-vOE" firstAttribute="leading" secondItem="ONo-C6-hII" secondAttribute="leading" id="Gbc-12-kDd"/>
-                            <constraint firstItem="LC6-Ar-hUp" firstAttribute="leading" secondItem="DHb-sG-ofJ" secondAttribute="trailing" constant="5" id="dhH-rj-EFz"/>
+                            <constraint firstItem="0A6-XY-YZg" firstAttribute="top" secondItem="DHb-sG-ofJ" secondAttribute="top" id="XDd-Z6-rqu"/>
+                            <constraint firstItem="7p0-Kh-MbL" firstAttribute="bottom" secondItem="DHb-sG-ofJ" secondAttribute="bottom" id="bsI-Qi-KLd"/>
                             <constraint firstItem="ttm-KM-vOE" firstAttribute="top" secondItem="ONo-C6-hII" secondAttribute="top" id="heo-Ry-DuZ"/>
-                            <constraint firstAttribute="trailing" secondItem="LC6-Ar-hUp" secondAttribute="trailing" constant="20" id="iRp-4x-YlC"/>
+                            <constraint firstAttribute="trailing" secondItem="0A6-XY-YZg" secondAttribute="trailing" constant="20" id="uOw-sy-hZl"/>
                             <constraint firstItem="KmT-cv-bXj" firstAttribute="leading" secondItem="ONo-C6-hII" secondAttribute="leading" constant="20" id="vS8-Us-oYH"/>
+                            <constraint firstItem="DHb-sG-ofJ" firstAttribute="leading" secondItem="ONo-C6-hII" secondAttribute="leading" constant="20" id="who-CH-uzn"/>
+                            <constraint firstItem="7p0-Kh-MbL" firstAttribute="leading" secondItem="DHb-sG-ofJ" secondAttribute="trailing" constant="8" id="xNo-1G-SVj"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="8f4-X6-80K"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="charCount" destination="7p0-Kh-MbL" id="ukO-aQ-0CL"/>
                         <outlet property="profileImage" destination="DHb-sG-ofJ" id="UDp-xn-1uk"/>
+                        <outlet property="textBox" destination="KmT-cv-bXj" id="AU9-vk-puu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J3I-sO-RlH" userLabel="First Responder" sceneMemberID="firstResponder"/>

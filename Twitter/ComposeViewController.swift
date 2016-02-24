@@ -10,14 +10,16 @@ import UIKit
 
 class ComposeViewController: UIViewController {
     
+    let client = TwitterClient.sharedInstance
+    
+    @IBOutlet weak var textBox: UITextView!
+    @IBOutlet weak var charCount: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.loadProfileImage(User.currentUser!.profileImageURL!)
-
-        // Do any additional setup after loading the view.
     }
     
     // --------------------------------------
@@ -42,6 +44,22 @@ class ComposeViewController: UIViewController {
             }
         )
     }
+    
+    // --------------------------------------
+    
+    @IBAction func onTweet(sender: AnyObject) {
+        
+        self.client.postTweet(
+            self.textBox.text,
+            success: { () -> () in
+                print("twitted");
+            }) { (error: NSError) -> () in
+                print("post tweet error: ", error.localizedDescription)
+        }
+        
+    }
+    
+    // --------------------------------------
 
     @IBAction func xClick(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
