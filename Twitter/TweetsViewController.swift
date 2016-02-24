@@ -15,7 +15,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     let ESTIMATE_ROW_HEIGHT: CGFloat = 120.0
     let RESPONSE_LIMIT = 20
     let client = TwitterClient.sharedInstance
+    let refreshControl = UIRefreshControl()
     
+    var loading: Bool = false
     var tweets: [Tweet]?
     
     // --------------------------------------
@@ -24,18 +26,47 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         self.setupTable()
         self.loadTimeline()
+        self.setupRefresh()
     }
     
     // -------------------------------------- load the timeline
     
     private func loadTimeline() {
+        
+        self.isLoading()
         client.homeTimeline({ (tweetArray: [Tweet]) -> () in
             self.tweets = tweetArray
             self.tableView.reloadData()
+            self.notLoading()
             
             }) { (error: NSError) -> () in
                 print("couldnt get tweets", error.localizedDescription)
         }
+    }
+    
+    private func isLoading() {
+        self.loading = true
+        self.refreshControl.endRefreshing()
+    }
+    
+    private func notLoading() {
+        self.loading = false
+        self.refreshControl.endRefreshing()
+    }
+    
+    // ------------------------------------------ set up refresh control
+    
+    private func setupRefresh() {
+        self.refreshControl.tintColor = UIColor.blackColor()
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.insertSubview(self.refreshControl, atIndex: 0)
+    }
+    
+    //-------------------------------------------- pull to refresh load data
+    
+    func refresh(refreshControl: UIRefreshControl) {
+        print("trying to refresh")
+        self.loadTimeline()
     }
     
     // -------------------------------------- logout
