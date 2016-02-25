@@ -82,7 +82,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
             
             detailViewController.data = State.homeTweets?[indexPath!.row]
         }
-        
+        if segue.identifier == "ComposeSegue" {
+            let composeViewController = segue.destinationViewController as! ComposeViewController
+            composeViewController.delegate = self
+        }
     }
 }
 
@@ -128,9 +131,13 @@ extension TweetsViewController: UITableViewDelegate {
 // compose delegate
 
 extension TweetsViewController: ComposeViewControllerDelegate {
+    
     func composeViewController(composeViewController: ComposeViewController, didTweet value: Tweet) {
-        // insert a tweet
         
+        State.homeTweets?.insert(value, atIndex: 0)
         
+        self.tableView.beginUpdates()
+        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Top)
+        self.tableView.endUpdates()
     }
 }

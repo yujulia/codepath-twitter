@@ -139,8 +139,10 @@ class TwitterClient: BDBOAuth1SessionManager {
                 if let tweetDict = response as? NSDictionary {
                     let tweetData = Tweet.init(tweetData: tweetDict)
                     success(tweetData)
+                } else {
+                    print("failed to get valid tweet response")
                 }
-                print("failed to get valid tweet response")
+                
             }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 failure(error)
         }
