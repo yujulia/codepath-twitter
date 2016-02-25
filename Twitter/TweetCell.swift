@@ -26,7 +26,7 @@ let railsStrings = [
 ]
 
 @objc protocol TweetCellDelegate {
-    optional func tweetCell(tweetCell: TweetCell, didWantToReply value: Int)
+    optional func tweetCell(tweetCell: TweetCell, didWantToReply value: TweetCell)
 }
 
 class TweetCell: UITableViewCell {
@@ -52,8 +52,6 @@ class TweetCell: UITableViewCell {
             self.setDataAsProperty()
         }
     }
-    
-    var row: Int?
 
     // --------------------------------------
     
@@ -134,6 +132,6 @@ class TweetCell: UITableViewCell {
     }
 
     @IBAction func onReply(sender: AnyObject) {
-        self.delegate?.tweetCell?(self, didWantToReply: self.row!)
+        self.delegate?.tweetCell?(self, didWantToReply: self)
     }
 }

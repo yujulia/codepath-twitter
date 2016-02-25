@@ -87,11 +87,12 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
             let composeViewController = segue.destinationViewController as! ComposeViewController
             composeViewController.delegate = self
             
-            if let replyTweet = sender as? Tweet {
-                composeViewController.replyToTweet = replyTweet
+            if let cell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPathForCell(cell)
+                let currentCellData = State.homeTweets?[indexPath!.row]
+                composeViewController.replyToTweet = currentCellData
             }
         }
-        
     }
 }
 
@@ -128,7 +129,6 @@ extension TweetsViewController: UITableViewDelegate {
         
         if let cellData = State.homeTweets?[indexPath.row] {
             cell.data = cellData
-            cell.row = indexPath.row
         }
 
         cell.delegate = self
@@ -140,9 +140,9 @@ extension TweetsViewController: UITableViewDelegate {
 // tweet cell delegate
 
 extension TweetsViewController: TweetCellDelegate {
-    func tweetCell(tweetCell: TweetCell, didWantToReply value: Int) {
-        let data = State.homeTweets?[value]
-        self.performSegueWithIdentifier("ComposeSegue", sender: data)
+    func tweetCell(tweetCell: TweetCell, didWantToReply value: TweetCell) {
+
+        self.performSegueWithIdentifier("ComposeSegue", sender: value)
     }
 }
 
