@@ -27,6 +27,7 @@ class ComposeViewController: UIViewController {
         self.loadProfileImage(State.currentUser!.profileImageURL!)
         self.textBox.delegate = self
         self.charCount.text = "0"
+        self.textBox.text = self.placeholder
     }
     
     // --------------------------------------
@@ -91,6 +92,8 @@ class ComposeViewController: UIViewController {
 
 extension ComposeViewController: UITextViewDelegate {
     
+    // --------------------------------------
+    
     func textViewDidChange(textView: UITextView) {
         
         let stringLength = textView.text.characters.count
@@ -108,16 +111,13 @@ extension ComposeViewController: UITextViewDelegate {
             self.charCount.textColor = UIColor.redColor()
             self.charCount.text = String(140 - stringLength)
         }
-        
     }
+    
+    // --------------------------------------
     
     func textViewDidBeginEditing(textView: UITextView) {
-        //
-        print("begin edit")
-    }
-    
-    func textViewDidEndEditing(textView: UITextView) {
-        //
-        print("end edit")
+        if self.textBox.text == self.placeholder {
+            self.textBox.text = ""
+        }
     }
 }
