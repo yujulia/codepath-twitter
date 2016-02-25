@@ -141,6 +141,8 @@ class TweetDetailViewController: UIViewController {
         }
     }
     
+    // -------------------------------------- update the counts
+    
     private func setFavoritesCount() {
         if let favcount = self.data?.favorites {
             self.favoriteCount.text = String(favcount)
@@ -152,6 +154,8 @@ class TweetDetailViewController: UIViewController {
             self.retweetCount.text = String(recount)
         }
     }
+    
+    // -------------------------------------- retweet
 
     @IBAction func onRetweet(sender: AnyObject) {
         if self.retweeted {
@@ -183,13 +187,14 @@ class TweetDetailViewController: UIViewController {
         
     }
     
+    // -------------------------------------- favorite
+    
     @IBAction func onFavorite(sender: AnyObject) {
         if self.favorited {
             
             TwitterClient.sharedInstance.removeFavorite(
                 Int(self.data!.id!),
                 success: { () -> () in
-                    print("yeah removed favorited")
                     self.favoriteButton.selected = false
                     self.favorited = false
                     self.data?.favorites--
@@ -201,7 +206,6 @@ class TweetDetailViewController: UIViewController {
             TwitterClient.sharedInstance.addFavorite(
                 Int(self.data!.id!),
                 success: { () -> () in
-                    print("yeah favorited")
                     self.favoriteButton.selected = true
                     self.favorited = true
                     self.data?.favorites++
@@ -211,9 +215,10 @@ class TweetDetailViewController: UIViewController {
         }
         
     }
+    
     // --------------------------------------
 
     @IBAction func onReply(sender: AnyObject) {
-    self.performSegueWithIdentifier("ReplySegue", sender: nil)
+        self.performSegueWithIdentifier("ReplySegue", sender: nil)
     }
 }

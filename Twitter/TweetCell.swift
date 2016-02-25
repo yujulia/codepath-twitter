@@ -93,6 +93,7 @@ class TweetCell: UITableViewCell {
                 self.retweetButton.selected = true
             } else {
                 self.retweetButton.selected = false
+                self.hideRetweeted()
             }
         }
         

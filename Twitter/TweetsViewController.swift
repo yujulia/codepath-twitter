@@ -62,7 +62,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
                 }
                 
                 self.tableView.beginUpdates()
-                self.tableView.insertRowsAtIndexPaths(addPaths, withRowAnimation: UITableViewRowAnimation.Top)
+                self.tableView.insertRowsAtIndexPaths(addPaths, withRowAnimation: UITableViewRowAnimation.Fade)
                 self.tableView.endUpdates()
                 
                 self.notLoading()
@@ -203,7 +203,7 @@ extension TweetsViewController: ComposeViewControllerDelegate {
         State.homeTweets?.insert(value, atIndex: 0)
         
         self.tableView.beginUpdates()
-        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Top)
+        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
         self.tableView.endUpdates()
     }
 }
