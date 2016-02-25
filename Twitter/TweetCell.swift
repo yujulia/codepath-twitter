@@ -110,17 +110,16 @@ class TweetCell: UITableViewCell {
         }
     }
     
-    
     // -------------------------------------- 
     
-    func hideRetweeted() {
+    private func hideRetweeted() {
         self.retweetIcon.hidden = true
         self.retweetLabel.hidden = true
         self.retweetTopConstraint.constant = 0
         self.retweetLabel.text = ""
     }
     
-    func showRetweeted(retweetedBy: String) {
+    private func showRetweeted(retweetedBy: String) {
         self.retweetIcon.hidden = false
         self.retweetLabel.hidden = false
         self.retweetTopConstraint.constant = 10
@@ -129,7 +128,7 @@ class TweetCell: UITableViewCell {
     
     // --------------------------------------
     
-    func loadProfileImage(profileImageURL: NSURL) {
+    private func loadProfileImage(profileImageURL: NSURL) {
         self.profileImage.alpha = 0
         
         ImageLoader.loadImage(
@@ -149,6 +148,8 @@ class TweetCell: UITableViewCell {
             }
         )
     }
+    
+    // --------------------------------------
 
     @IBAction func onRetweet(sender: AnyObject) {
         if self.retweeted {
@@ -172,6 +173,8 @@ class TweetCell: UITableViewCell {
             })
         }
     }
+    
+    // --------------------------------------
 
     @IBAction func onFavorite(sender: AnyObject) {
         if self.favorited {
@@ -199,6 +202,8 @@ class TweetCell: UITableViewCell {
         }
         
     }
+    
+    // --------------------------------------
     
     @IBAction func onReply(sender: AnyObject) {
         self.delegate?.tweetCell?(self, didWantToReply: self)

@@ -197,7 +197,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    // -----------------------------------------
+    // ----------------------------------------- favorite / remove favorite
     
     func addFavorite(fave_id: Int, success: ()->()) {
         let endpoint = "/1.1/favorites/create.json"
@@ -233,7 +233,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    // -----------------------------------------
+    // ----------------------------------------- retweet / unretweet
     
     func retweet(retweet_id: Int, success: (Tweet)->()) {
         let endpoint = "/1.1/statuses/retweet/\(retweet_id).json"
