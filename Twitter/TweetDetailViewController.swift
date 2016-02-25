@@ -36,7 +36,7 @@ class TweetDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideRetweeted()
         self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height)
         self.setDataAsProperty()
     }
