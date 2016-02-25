@@ -127,10 +127,26 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     // -----------------------------------------
     
-    func postTweet(tweet: String, success: (Tweet)->(), failure: (NSError) -> ()) {
+    func postReplyTweet(tweet: String, replyTweet: Tweet, success: (Tweet)->(), failure: (NSError) -> ()) {
         
+        if let replyID = replyTweet.id {
+            let tweetParam: NSDictionary = ["status" : tweet, "in_reply_to_status_id": replyID]
+            self.tweet(tweetParam, success: success, failure: failure)
+        } else {
+            print("unable to find repy id")
+        }
+    }
+    
+    // -----------------------------------------
+    
+    func postNewTweet(tweet: String, success: (Tweet)->(), failure: (NSError) -> ()) {
         let tweetParam: NSDictionary = ["status" : tweet]
-        
+        self.tweet(tweetParam, success: success, failure: failure)
+    }
+    
+    // -----------------------------------------
+    
+    func tweet(tweetParam: NSDictionary, success: (Tweet)->(), failure: (NSError) -> ()) {
         self.POST(
             "/1.1/statuses/update.json",
             parameters: tweetParam,
@@ -147,5 +163,28 @@ class TwitterClient: BDBOAuth1SessionManager {
                 failure(error)
         }
     }
+    
+    // -----------------------------------------
+    
+//    func postTweet(tweet: String, success: (Tweet)->(), failure: (NSError) -> ()) {
+//        
+//        let tweetParam: NSDictionary = ["status" : tweet]
+//        
+//        self.POST(
+//            "/1.1/statuses/update.json",
+//            parameters: tweetParam,
+//            progress: nil,
+//            success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+//                if let tweetDict = response as? NSDictionary {
+//                    let tweetData = Tweet.init(tweetData: tweetDict)
+//                    success(tweetData)
+//                } else {
+//                    print("failed to get valid tweet response")
+//                }
+//                
+//            }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+//                failure(error)
+//        }
+//    }
     
 }

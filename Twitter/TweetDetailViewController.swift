@@ -115,7 +115,18 @@ class TweetDetailViewController: UIViewController {
             }
         )
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "ReplySegue" {
+            let composeViewController = segue.destinationViewController as! ComposeViewController
+            composeViewController.replyToTweet = self.data
+        }
+    }
 
+    @IBAction func onReply(sender: AnyObject) {
+        // manually do reply segue
+    }
 
 
 }

@@ -95,11 +95,11 @@
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KmT-cv-bXj">
                                 <rect key="frame" x="20" y="84" width="280" height="200"/>
-                                <color key="backgroundColor" red="0.83921568629999999" green="0.91764705879999997" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.074509803920000006" green="0.60392156860000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="E8s-vT-9l0"/>
                                 </constraints>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -227,6 +227,9 @@
                                                     <state key="normal" image="reply-action_0">
                                                         <color key="titleColor" red="0.1647058824" green="0.74117647060000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <segue destination="Y70-oQ-fN0" kind="modal" identifier="ReplySegue" id="uuS-gb-EZm"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70j-bZ-rR9">
                                                     <rect key="frame" x="135" y="117" width="20" height="20"/>
@@ -422,6 +425,9 @@
                                                 <state key="normal" image="reply-action_0">
                                                     <color key="titleColor" red="0.1647058824" green="0.74117647060000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onReply:" destination="X4n-UX-8nd" eventType="touchUpInside" id="Jyz-us-Doh"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moY-3l-Zv2" userLabel="retweetcount">
                                                 <rect key="frame" x="75" y="200.5" width="26" height="17"/>
@@ -518,6 +524,9 @@
                     <navigationItem key="navigationItem" id="pSY-wR-4PZ">
                         <barButtonItem key="rightBarButtonItem" title="Reply" id="AVB-Kq-Dj5">
                             <inset key="imageInsets" minX="20" minY="10" maxX="0.0" maxY="20"/>
+                            <connections>
+                                <segue destination="Y70-oQ-fN0" kind="modal" identifier="ReplySegue" id="ypb-gJ-NDf"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -539,7 +548,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EKG-17-kcj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="302"/>
+            <point key="canvasLocation" x="1535" y="293"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NrT-Fo-kwY">
@@ -576,5 +585,8 @@
         <image name="twitter-circle-white" width="48" height="48"/>
         <image name="write" width="48" height="48"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ypb-gJ-NDf"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -20,9 +20,11 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     
     let client = TwitterClient.sharedInstance
-    let placeholder = "What's Happening?"
+    let textBoxPlaceholder = "What's Happening?"
     
     weak var delegate: ComposeViewControllerDelegate?
+    weak var replyToTweet: Tweet?
+    var replying = false
     
     // --------------------------------------
 
@@ -33,7 +35,17 @@ class ComposeViewController: UIViewController {
         self.loadProfileImage(State.currentUser!.profileImageURL!)
         self.textBox.delegate = self
         self.charCount.text = "0"
-        self.textBox.text = self.placeholder
+        self.textBox.text = self.textBoxPlaceholder
+        self.setupReply()
+    }
+    
+    // --------------------------------------
+    
+    func setupReply() {
+        if replyToTweet != nil {
+            self.replying = true
+            self.textBox.text = "@\(replyToTweet?.screenName as! String) "
+        }
     }
     
     // --------------------------------------
@@ -62,17 +74,38 @@ class ComposeViewController: UIViewController {
     // --------------------------------------
     
     @IBAction func onTweet(sender: AnyObject) {
-        
-        // nothing to post
-        
+
         if !self.composeBtn.enabled {
             return
         }
         
-        // something to post
-        
-        self.client.postTweet(
+        if self.replying {
+            self.goingToReply()
+        } else {
+            self.goingToTweet()
+        }
+    }
+    
+    // --------------------------------------
+    
+    private func goingToTweet() {
+        self.client.postNewTweet(
             self.textBox.text,
+            success: { (tweet: Tweet) -> () in
+                State.currentTweet = tweet
+                self.delegate?.composeViewController?(self, didTweet: tweet)
+                self.closeView()
+            }) { (error: NSError) -> () in
+                print("post tweet error: ", error.localizedDescription)
+        }
+    }
+    
+    // --------------------------------------
+    
+    private func goingToReply() {
+        self.client.postReplyTweet(
+            self.textBox.text,
+            replyTweet: self.replyToTweet!,
             success: { (tweet: Tweet) -> () in
                 State.currentTweet = tweet
                 self.delegate?.composeViewController?(self, didTweet: tweet)
@@ -115,7 +148,6 @@ extension ComposeViewController: UITextViewDelegate {
         }
         
         if stringLength > 140 {
-            print("too big")
             self.charCount.textColor = UIColor.redColor()
             self.charCount.text = String(140 - stringLength)
         }
@@ -124,7 +156,7 @@ extension ComposeViewController: UITextViewDelegate {
     // --------------------------------------
     
     func textViewDidBeginEditing(textView: UITextView) {
-        if self.textBox.text == self.placeholder {
+        if self.textBox.text == self.textBoxPlaceholder {
             self.textBox.text = ""
         }
     }

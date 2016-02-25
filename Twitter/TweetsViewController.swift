@@ -62,7 +62,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     //-------------------------------------------- pull to refresh load data
     
     func refresh(refreshControl: UIRefreshControl) {
-        print("trying to refresh")
         self.loadTimeline()
     }
     
