@@ -9,6 +9,8 @@
 import UIKit
 import MBProgressHUD
 
+private let FEED_LIMIT = 20
+
 class TweetsViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
@@ -20,6 +22,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     
     var loading: Bool = false
     var hud: MBProgressHUD?
+    var page: Int = 0
 
     // --------------------------------------
     
@@ -44,8 +47,31 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-    private func loadMore() {
+    private func loadMore(last_id: Int) {
         print("trying to load more");
+        page++
+        self.isLoading()
+        client.loadMoreHomeTimeline(
+            last_id,
+            success: { () -> () in
+            
+                let startRow = self.page * FEED_LIMIT
+                var addPaths = [NSIndexPath]()
+                
+                for index in startRow...startRow + FEED_LIMIT - 1 {
+                    addPaths.append(NSIndexPath(forRow: index, inSection: 0))
+                }
+                
+                self.tableView.beginUpdates()
+                self.tableView.insertRowsAtIndexPaths(addPaths, withRowAnimation: UITableViewRowAnimation.Top)
+                self.tableView.endUpdates()
+                
+                self.notLoading()
+            },
+            failure: { (error: NSError) -> () in
+                print("couldnt get tweets", error.localizedDescription)
+            }
+        )
     }
     
     private func isLoading() {
@@ -83,7 +109,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     // -------------------------------------- logout
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         
         if segue.identifier == "TweetDetailSegue" {
             let detailViewController = segue.destinationViewController as! TweetDetailViewController
@@ -143,7 +168,9 @@ extension TweetsViewController: UITableViewDelegate {
         cell.delegate = self
         
         if indexPath.row >= State.homeTweets!.count-1 {
-            self.loadMore()
+            if let cellData = State.homeTweets?[indexPath.row] {
+                self.loadMore(Int(cellData.id!))
+            }
         }
     
         return cell

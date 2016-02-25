@@ -105,30 +105,47 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    // ----------------------------------------- 
+    // -----------------------------------------
     
     func loadHomeTimeline(success: () -> (), failure: (NSError) -> ()) {
-        
-        self.getHomeTimeline({ (response: AnyObject) -> () in
-            if let allTweets = response as? [NSDictionary] {
-                let tweets = Tweet.tweetsWithArray(allTweets)
-                State.homeTweets = tweets
-                success()
-            }
-
-        }) { (error: NSError) -> () in
+        self.getHomeTimeline(
+            nil,
+            success: { (response: AnyObject) -> () in
+                if let allTweets = response as? [NSDictionary] {
+                    let tweets = Tweet.tweetsWithArray(allTweets)
+                    State.homeTweets = tweets
+                    success()
+                }
+            },
+            failure: { (error: NSError) -> () in
                 failure(error)
-        }
+            }
+        )
     }
     
-    func loadMoreHomeTimeline(success: () -> (), failure: (NSError) -> ()) {
+    func loadMoreHomeTimeline(last_id: Int, success: () -> (), failure: (NSError) -> ()) {
+        let nextMax = last_id + 1
+        let params = ["max_id": nextMax]
         
+        self.getHomeTimeline(
+            params,
+            success: { (response: AnyObject) -> () in
+                if let allTweets = response as? [NSDictionary] {
+                    let tweets = Tweet.tweetsWithArray(allTweets)
+                    State.homeTweets?.appendContentsOf(tweets)
+                    success()
+                }
+            },
+            failure: { (error: NSError) -> () in
+                failure(error)
+            }
+        )
     }
     
-    func getHomeTimeline(success: (AnyObject) -> (), failure: (NSError) -> ()) {
+    func getHomeTimeline(params: NSDictionary?, success: (AnyObject) -> (), failure: (NSError) -> ()) {
         self.GET(
             "1.1/statuses/home_timeline.json",
-            parameters: nil,
+            parameters: params,
             progress: nil,
             success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 success(response!)
