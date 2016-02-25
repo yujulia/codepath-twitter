@@ -18,6 +18,7 @@ class Tweet: NSObject {
     var favorites: Int = 0
     var profileImageURL: NSURL?
     var retweeted: Bool?
+    var favorited: Bool?
     var id: NSNumber?
     
     // -------------------------------------- 
@@ -30,6 +31,7 @@ class Tweet: NSObject {
         self.name = tweetData.valueForKeyPath("user.name") as? String
         self.screenName = tweetData.valueForKeyPath("user.screen_name") as? String
         self.retweeted = tweetData["retweeted"] as? Bool ?? false
+        self.favorited = tweetData["favorited"] as? Bool ?? false
         self.id = tweetData["id"] as? NSNumber ?? 0
         
         if let timestampStr = tweetData["created_at"] as? String {

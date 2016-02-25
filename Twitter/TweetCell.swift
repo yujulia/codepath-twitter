@@ -90,7 +90,16 @@ class TweetCell: UITableViewCell {
                 }
             }
         }
+        
+        if let favorited = self.data?.favorited {
+            if favorited {
+                self.favoriteButton.selected = true
+            } else {
+                self.favoriteButton.selected = false
+            }
+        }
     }
+    
     
     // -------------------------------------- 
     
@@ -131,6 +140,12 @@ class TweetCell: UITableViewCell {
         )
     }
 
+    @IBAction func onRetweet(sender: AnyObject) {
+        
+    }
+
+    @IBAction func onFavorite(sender: AnyObject) {
+    }
     @IBAction func onReply(sender: AnyObject) {
         self.delegate?.tweetCell?(self, didWantToReply: self)
     }
