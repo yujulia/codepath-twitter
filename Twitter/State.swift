@@ -15,6 +15,8 @@ class State: NSObject {
     static var _currentUser: User?
     static var currentTweet: Tweet?
     static var homeTweets: [Tweet]?
+    static var lastBatchCount: Int = 0
+    static var currentHomeTweetCount: Int = 0
     
     // -------------------------------------- get and set currentUser of the app
     

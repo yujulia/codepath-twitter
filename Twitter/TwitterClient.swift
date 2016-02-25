@@ -113,6 +113,8 @@ class TwitterClient: BDBOAuth1SessionManager {
             success: { (response: AnyObject) -> () in
                 if let allTweets = response as? [NSDictionary] {
                     let tweets = Tweet.tweetsWithArray(allTweets)
+                    State.currentHomeTweetCount = tweets.count
+                    State.lastBatchCount = tweets.count
                     State.homeTweets = tweets
                     success()
                 }
@@ -124,7 +126,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func loadMoreHomeTimeline(last_id: Int, success: () -> (), failure: (NSError) -> ()) {
-        let nextMax = last_id + 1
+        let nextMax = last_id - 1
         let params = ["max_id": nextMax]
         
         self.getHomeTimeline(
@@ -132,7 +134,12 @@ class TwitterClient: BDBOAuth1SessionManager {
             success: { (response: AnyObject) -> () in
                 if let allTweets = response as? [NSDictionary] {
                     let tweets = Tweet.tweetsWithArray(allTweets)
+                    State.lastBatchCount = tweets.count
                     State.homeTweets?.appendContentsOf(tweets)
+                    State.currentHomeTweetCount = (State.homeTweets?.count)!
+                    
+                    print("load more got", State.lastBatchCount, " total ", State.currentHomeTweetCount)
+                    
                     success()
                 }
             },

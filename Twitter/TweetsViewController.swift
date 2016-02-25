@@ -22,8 +22,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     
     var loading: Bool = false
     var hud: MBProgressHUD?
-    var page: Int = 0
-
+    
     // --------------------------------------
     
     override func viewDidLoad() {
@@ -33,7 +32,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
         self.setupRefresh()
     }
 
-    
     // -------------------------------------- load the timeline
     
     private func loadTimeline() {
@@ -49,16 +47,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     
     private func loadMore(last_id: Int) {
         print("trying to load more");
-        page++
+
         self.isLoading()
         client.loadMoreHomeTimeline(
             last_id,
             success: { () -> () in
-            
-                let startRow = self.page * FEED_LIMIT
+                
+                let startRow = State.currentHomeTweetCount - State.lastBatchCount
+
                 var addPaths = [NSIndexPath]()
                 
-                for index in startRow...startRow + FEED_LIMIT - 1 {
+                for index in startRow...startRow + State.lastBatchCount - 1 {
                     addPaths.append(NSIndexPath(forRow: index, inSection: 0))
                 }
                 
