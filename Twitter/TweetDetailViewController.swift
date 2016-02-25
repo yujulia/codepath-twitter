@@ -116,6 +116,8 @@ class TweetDetailViewController: UIViewController {
         )
     }
     
+    // --------------------------------------
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "ReplySegue" {
@@ -123,10 +125,10 @@ class TweetDetailViewController: UIViewController {
             composeViewController.replyToTweet = self.data
         }
     }
+    
+    // --------------------------------------
 
     @IBAction func onReply(sender: AnyObject) {
-        // manually do reply segue
+        self.performSegueWithIdentifier("ReplySegue", sender: nil)
     }
-
-
 }

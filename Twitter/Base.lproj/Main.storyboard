@@ -228,7 +228,7 @@
                                                         <color key="titleColor" red="0.1647058824" green="0.74117647060000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="Y70-oQ-fN0" kind="modal" identifier="ReplySegue" id="uuS-gb-EZm"/>
+                                                        <action selector="onReply:" destination="ehc-CM-qFh" eventType="touchUpInside" id="E43-cA-STy"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="70j-bZ-rR9">
@@ -586,7 +586,7 @@
         <image name="write" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ypb-gJ-NDf"/>
+        <segue reference="l3l-Zs-sYR"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

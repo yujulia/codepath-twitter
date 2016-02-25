@@ -75,16 +75,23 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        
         if segue.identifier == "TweetDetailSegue" {
             let detailViewController = segue.destinationViewController as! TweetDetailViewController
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
+            let currentCellData = State.homeTweets?[indexPath!.row]
             
-            detailViewController.data = State.homeTweets?[indexPath!.row]
+            detailViewController.data = currentCellData
         }
         if segue.identifier == "ComposeSegue" {
             let composeViewController = segue.destinationViewController as! ComposeViewController
             composeViewController.delegate = self
+            
+            if let replyTweet = sender as? Tweet {
+                composeViewController.replyToTweet = replyTweet
+            }
         }
+        
     }
 }
 
@@ -121,9 +128,21 @@ extension TweetsViewController: UITableViewDelegate {
         
         if let cellData = State.homeTweets?[indexPath.row] {
             cell.data = cellData
+            cell.row = indexPath.row
         }
+
+        cell.delegate = self
     
         return cell
+    }
+}
+
+// tweet cell delegate
+
+extension TweetsViewController: TweetCellDelegate {
+    func tweetCell(tweetCell: TweetCell, didWantToReply value: Int) {
+        let data = State.homeTweets?[value]
+        self.performSegueWithIdentifier("ComposeSegue", sender: data)
     }
 }
 

@@ -25,6 +25,10 @@ let railsStrings = [
     "Years": " years",
 ]
 
+@objc protocol TweetCellDelegate {
+    optional func tweetCell(tweetCell: TweetCell, didWantToReply value: Int)
+}
+
 class TweetCell: UITableViewCell {
 
     @IBOutlet weak var tweetTextLabel: UILabel!
@@ -41,11 +45,15 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetLabel: UILabel!
     @IBOutlet weak var retweetTopConstraint: NSLayoutConstraint!
     
+    weak var delegate: TweetCellDelegate?
+    
     var data: Tweet? {
         didSet {
             self.setDataAsProperty()
         }
     }
+    
+    var row: Int?
 
     // --------------------------------------
     
@@ -123,5 +131,9 @@ class TweetCell: UITableViewCell {
                 self.profileImage.alpha = 1
             }
         )
+    }
+
+    @IBAction func onReply(sender: AnyObject) {
+        self.delegate?.tweetCell?(self, didWantToReply: self.row!)
     }
 }
