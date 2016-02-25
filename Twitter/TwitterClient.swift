@@ -105,7 +105,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    // -----------------------------------------
+    // ----------------------------------------- load home timeline or load more
     
     func loadHomeTimeline(success: () -> (), failure: (NSError) -> ()) {
         self.getHomeTimeline(
@@ -162,7 +162,7 @@ class TwitterClient: BDBOAuth1SessionManager {
 
     }
     
-    // -----------------------------------------
+    // ----------------------------------------- post reply or new tweet
     
     func postReplyTweet(tweet: String, replyTweet: Tweet, success: (Tweet)->(), failure: (NSError) -> ()) {
         
@@ -174,14 +174,10 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    // -----------------------------------------
-    
     func postNewTweet(tweet: String, success: (Tweet)->(), failure: (NSError) -> ()) {
         let tweetParam: NSDictionary = ["status" : tweet]
         self.tweet(tweetParam, success: success, failure: failure)
     }
-    
-    // -----------------------------------------
     
     func tweet(tweetParam: NSDictionary, success: (Tweet)->(), failure: (NSError) -> ()) {
         self.POST(
@@ -203,25 +199,43 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     // -----------------------------------------
     
-//    func postTweet(tweet: String, success: (Tweet)->(), failure: (NSError) -> ()) {
-//        
-//        let tweetParam: NSDictionary = ["status" : tweet]
-//        
-//        self.POST(
-//            "/1.1/statuses/update.json",
-//            parameters: tweetParam,
-//            progress: nil,
-//            success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-//                if let tweetDict = response as? NSDictionary {
-//                    let tweetData = Tweet.init(tweetData: tweetDict)
-//                    success(tweetData)
-//                } else {
-//                    print("failed to get valid tweet response")
-//                }
-//                
-//            }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-//                failure(error)
-//        }
-//    }
+    func addFavorite(fave_id: Int, success: ()->()) {
+        let endpoint = "/1.1/favorites/create.json"
+        
+        let faveParams = ["id": fave_id]
+        
+        self.POST(
+            endpoint,
+            parameters: faveParams,
+            progress: nil,
+            success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                
+                success()
+                
+            }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("favorited got error", error.localizedDescription)
+        }
+    }
     
+    func removeFavorite(fave_id: Int, success: ()->()) {
+        let endpoint = "/1.1/favorites/destroy.json"
+        
+        let faveParams = ["id": fave_id]
+        
+        self.POST(
+            endpoint,
+            parameters: faveParams,
+            progress: nil,
+            success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                success()
+            }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("unfavorited got error", error.localizedDescription)
+        }
+    }
+    
+    
+    func retweet(succes: ()->()) {
+        let endpoint = "/1.1/statuses/retweet/241259202004267009.json"
+        
+    }
 }

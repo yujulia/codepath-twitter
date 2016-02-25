@@ -52,6 +52,8 @@ class TweetCell: UITableViewCell {
             self.setDataAsProperty()
         }
     }
+    var favorited: Bool = false
+    var retweeted: Bool = false
 
     // --------------------------------------
     
@@ -88,6 +90,9 @@ class TweetCell: UITableViewCell {
                 if let userName = State.currentUser?.screenName {
                     showRetweeted(String(userName))
                 }
+                self.retweetButton.selected = true
+            } else {
+                self.retweetButton.selected = false
             }
         }
         
@@ -145,7 +150,32 @@ class TweetCell: UITableViewCell {
     }
 
     @IBAction func onFavorite(sender: AnyObject) {
+        if self.favorited {
+            
+            TwitterClient.sharedInstance.removeFavorite(
+                Int(self.data!.id!),
+                success: { () -> () in
+                    print("yeah removed favorited")
+                    self.favoriteButton.selected = false
+                    self.favorited = false
+                    self.data?.favorites--
+            })
+            
+        } else {
+            
+            TwitterClient.sharedInstance.addFavorite(
+                Int(self.data!.id!),
+                success: { () -> () in
+                    print("yeah favorited")
+                    self.favoriteButton.selected = true
+                    self.favorited = true
+                    self.data?.favorites++
+            })
+            
+        }
+        
     }
+    
     @IBAction func onReply(sender: AnyObject) {
         self.delegate?.tweetCell?(self, didWantToReply: self)
     }

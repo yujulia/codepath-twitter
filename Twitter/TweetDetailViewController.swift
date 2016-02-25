@@ -72,6 +72,16 @@ class TweetDetailViewController: UIViewController {
                 if let userName = State.currentUser?.screenName {
                     showRetweeted(String(userName))
                 }
+                self.retweetButton.selected = true
+            } else {
+                self.retweetButton.selected = false
+            }
+        }
+        if let favorited = self.data?.favorited {
+            if favorited {
+                self.favoriteButton.selected = true
+            } else {
+                self.favoriteButton.selected = false
             }
         }
     }
@@ -153,13 +163,27 @@ class TweetDetailViewController: UIViewController {
     
     @IBAction func onFavorite(sender: AnyObject) {
         if self.favorited {
-            self.favoriteButton.selected = false
-            self.favorited = false
-            self.data?.favorites--
+            
+            TwitterClient.sharedInstance.removeFavorite(
+                Int(self.data!.id!),
+                success: { () -> () in
+                    print("yeah removed favorited")
+                    self.favoriteButton.selected = false
+                    self.favorited = false
+                    self.data?.favorites--
+            })
+
         } else {
-            self.favoriteButton.selected = true
-            self.favorited = true
-            self.data?.favorites++
+            
+            TwitterClient.sharedInstance.addFavorite(
+                Int(self.data!.id!),
+                success: { () -> () in
+                    print("yeah favorited")
+                    self.favoriteButton.selected = true
+                    self.favorited = true
+                    self.data?.favorites++
+            })
+            
         }
         self.setFavoritesCount()
     }
