@@ -18,8 +18,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     let refreshControl = UIRefreshControl()
     
     var loading: Bool = false
-    var tweets: [Tweet]?
-    
+
     // --------------------------------------
     
     override func viewDidLoad() {
@@ -34,12 +33,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     private func loadTimeline() {
         
         self.isLoading()
-        client.homeTimeline({ (tweetArray: [Tweet]) -> () in
-            self.tweets = tweetArray
+        client.homeTimeline({ () -> () in
             self.tableView.reloadData()
             self.notLoading()
-            
-            }) { (error: NSError) -> () in
+        }) { (error: NSError) -> () in
                 print("couldnt get tweets", error.localizedDescription)
         }
     }
@@ -83,7 +80,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
             let detailViewController = segue.destinationViewController as! TweetDetailViewController
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
             
-            detailViewController.data = self.tweets?[indexPath!.row]
+            detailViewController.data = State.homeTweets?[indexPath!.row]
         }
         
     }
@@ -107,7 +104,7 @@ extension TweetsViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let tweets = self.tweets {
+        if let tweets = State.homeTweets {
             return tweets.count
         } else {
             return 0
@@ -120,10 +117,20 @@ extension TweetsViewController: UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
         
-        if let cellData = self.tweets?[indexPath.row] {
+        if let cellData = State.homeTweets?[indexPath.row] {
             cell.data = cellData
         }
     
         return cell
+    }
+}
+
+// compose delegate
+
+extension TweetsViewController: ComposeViewControllerDelegate {
+    func composeViewController(composeViewController: ComposeViewController, didTweet value: Tweet) {
+        // insert a tweet
+        
+        
     }
 }

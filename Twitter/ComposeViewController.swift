@@ -8,15 +8,21 @@
 
 import UIKit
 
+@objc protocol ComposeViewControllerDelegate {
+    optional func composeViewController(composeViewController: ComposeViewController, didTweet value: Tweet)
+}
+
 class ComposeViewController: UIViewController {
-    
-    let client = TwitterClient.sharedInstance
-    let placeholder = "What's Happening?"
-    
+
     @IBOutlet weak var composeBtn: UIButton!
     @IBOutlet weak var textBox: UITextView!
     @IBOutlet weak var charCount: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
+    
+    let client = TwitterClient.sharedInstance
+    let placeholder = "What's Happening?"
+    
+    weak var delegate: ComposeViewControllerDelegate?
     
     // --------------------------------------
 
@@ -67,13 +73,15 @@ class ComposeViewController: UIViewController {
         
         self.client.postTweet(
             self.textBox.text,
-            success: { () -> () in
+            success: { (tweet: Tweet) -> () in
+                State.currentTweet = tweet
+                self.delegate?.composeViewController?(self, didTweet: tweet)
                 self.closeView()
             }) { (error: NSError) -> () in
                 print("post tweet error: ", error.localizedDescription)
         }
     }
-    
+
     // --------------------------------------
     
     private func closeView() {

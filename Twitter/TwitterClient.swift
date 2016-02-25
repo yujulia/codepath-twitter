@@ -107,7 +107,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     // ----------------------------------------- 
     
-    func homeTimeline(success: ([Tweet]) -> (), failure: (NSError) -> ()) {
+    func homeTimeline(success: () -> (), failure: (NSError) -> ()) {
         
         self.GET(
             "1.1/statuses/home_timeline.json",
@@ -116,7 +116,8 @@ class TwitterClient: BDBOAuth1SessionManager {
             success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 if let allTweets = response as? [NSDictionary] {
                     let tweets = Tweet.tweetsWithArray(allTweets)
-                    success(tweets)
+                    State.homeTweets = tweets
+                    success()
                 }
                 
             }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
@@ -126,7 +127,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     // -----------------------------------------
     
-    func postTweet(tweet: String, success: ()->(), failure: (NSError) -> ()) {
+    func postTweet(tweet: String, success: (Tweet)->(), failure: (NSError) -> ()) {
         
         let tweetParam: NSDictionary = ["status" : tweet]
         
@@ -135,8 +136,11 @@ class TwitterClient: BDBOAuth1SessionManager {
             parameters: tweetParam,
             progress: nil,
             success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-                print("tweeted", response)
-                success()
+                if let tweetDict = response as? NSDictionary {
+                    let tweetData = Tweet.init(tweetData: tweetDict)
+                    success(tweetData)
+                }
+                print("failed to get valid tweet response")
             }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 failure(error)
         }
