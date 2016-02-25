@@ -233,9 +233,47 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
+    // -----------------------------------------
     
-    func retweet(succes: ()->()) {
-        let endpoint = "/1.1/statuses/retweet/241259202004267009.json"
+    func retweet(retweet_id: Int, success: (Tweet)->()) {
+        let endpoint = "/1.1/statuses/retweet/\(retweet_id).json"
+        let retweetParams = ["id": retweet_id]
         
+        self.POST(
+            endpoint,
+            parameters: retweetParams,
+            progress: nil,
+            success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                
+                if let tweetDict = response as? NSDictionary {
+                    let tweetData = Tweet.init(tweetData: tweetDict)
+                    success(tweetData)
+                } else {
+                    print("failed to get valid tweet response from retweet")
+                }
+                
+            }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("retweet got error", error.localizedDescription)
+        }
+    }
+    
+    func unRetweet(retweet_id: Int, success: (Tweet)->()) {
+        let endpoint = "/1.1/statuses/unretweet/\(retweet_id).json"
+        let retweetParams = ["id": retweet_id]
+        
+        self.POST(
+            endpoint,
+            parameters: retweetParams,
+            progress: nil,
+            success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                if let tweetDict = response as? NSDictionary {
+                    let tweetData = Tweet.init(tweetData: tweetDict)
+                    success(tweetData)
+                } else {
+                    print("failed to get valid tweet response from unretweet")
+                }
+            }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("unretweet got error", error.localizedDescription)
+        }
     }
 }

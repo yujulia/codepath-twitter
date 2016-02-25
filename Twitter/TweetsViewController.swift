@@ -114,6 +114,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
             let currentCellData = State.homeTweets?[indexPath!.row]
             
+            detailViewController.delegate = self
             detailViewController.data = currentCellData
         }
         if segue.identifier == "ComposeSegue" {
@@ -182,6 +183,14 @@ extension TweetsViewController: TweetCellDelegate {
     func tweetCell(tweetCell: TweetCell, didWantToReply value: TweetCell) {
 
         self.performSegueWithIdentifier("ComposeSegue", sender: value)
+    }
+}
+
+// tweet detail delegate
+extension TweetsViewController: TweetDetailViewControllerDelegate {
+    func tweetDetailViewController(tweetDetailViewController: TweetDetailViewController, didRetweet value: Tweet) {
+        print("retweeted got info from detail but i guess i'll do nothing...")
+
     }
 }
 

@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol TweetDetailViewControllerDelegate {
+    optional func tweetDetailViewController(tweetDetailViewController: TweetDetailViewController, didRetweet value: Tweet)
+}
+
 class TweetDetailViewController: UIViewController {
     
 
@@ -29,6 +33,8 @@ class TweetDetailViewController: UIViewController {
     
     @IBOutlet weak var retweetCount: UILabel!
     @IBOutlet weak var favoriteCount: UILabel!
+    
+    weak var delegate: TweetDetailViewControllerDelegate?
     
     var data: Tweet?
     
@@ -149,16 +155,32 @@ class TweetDetailViewController: UIViewController {
 
     @IBAction func onRetweet(sender: AnyObject) {
         if self.retweeted {
-            self.retweetButton.selected = false
-            self.retweeted = false
-            self.data?.retweets--
+            
+            TwitterClient.sharedInstance.unRetweet(
+                Int(self.data!.id!),
+                success: { (returnedTweet: Tweet) -> () in
+                    print("un retweet returned", returnedTweet)
+                    self.retweetButton.selected = false
+                    self.retweeted = false
+                    self.data?.retweets--
+                    self.setRetweetsCount()
+            })
+            
         } else {
-            self.retweetButton.selected = true
-            self.retweeted = true
-            self.data?.retweets++
+            
+            TwitterClient.sharedInstance.retweet(
+                Int(self.data!.id!),
+                success: { (returnedTweet: Tweet) -> () in
+
+                    print("retweet returned", returnedTweet)
+                    self.retweetButton.selected = true
+                    self.retweeted = true
+                    self.data?.retweets++
+                    self.delegate?.tweetDetailViewController?(self, didRetweet: returnedTweet)
+                    self.setRetweetsCount()
+            })
         }
         
-        self.setRetweetsCount()
     }
     
     @IBAction func onFavorite(sender: AnyObject) {
@@ -171,6 +193,7 @@ class TweetDetailViewController: UIViewController {
                     self.favoriteButton.selected = false
                     self.favorited = false
                     self.data?.favorites--
+                    self.setFavoritesCount()
             })
 
         } else {
@@ -182,10 +205,11 @@ class TweetDetailViewController: UIViewController {
                     self.favoriteButton.selected = true
                     self.favorited = true
                     self.data?.favorites++
+                    self.setFavoritesCount()
             })
             
         }
-        self.setFavoritesCount()
+        
     }
     // --------------------------------------
 
