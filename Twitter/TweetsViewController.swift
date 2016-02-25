@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class TweetsViewController: UIViewController, UITableViewDataSource {
 
@@ -18,6 +19,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
     let refreshControl = UIRefreshControl()
     
     var loading: Bool = false
+    var hud: MBProgressHUD?
 
     // --------------------------------------
     
@@ -27,13 +29,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
         self.loadTimeline()
         self.setupRefresh()
     }
+
     
     // -------------------------------------- load the timeline
     
     private func loadTimeline() {
         
         self.isLoading()
-        client.homeTimeline({ () -> () in
+        client.loadHomeTimeline({ () -> () in
             self.tableView.reloadData()
             self.notLoading()
         }) { (error: NSError) -> () in
@@ -41,14 +44,20 @@ class TweetsViewController: UIViewController, UITableViewDataSource {
         }
     }
     
+    private func loadMore() {
+        print("trying to load more");
+    }
+    
     private func isLoading() {
         self.loading = true
         self.refreshControl.endRefreshing()
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
     }
     
     private func notLoading() {
         self.loading = false
         self.refreshControl.endRefreshing()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
     
     // ------------------------------------------ set up refresh control
@@ -132,6 +141,10 @@ extension TweetsViewController: UITableViewDelegate {
         }
 
         cell.delegate = self
+        
+        if indexPath.row >= State.homeTweets!.count-1 {
+            self.loadMore()
+        }
     
         return cell
     }

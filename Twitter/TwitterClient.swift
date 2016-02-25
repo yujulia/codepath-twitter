@@ -107,22 +107,35 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     // ----------------------------------------- 
     
-    func homeTimeline(success: () -> (), failure: (NSError) -> ()) {
+    func loadHomeTimeline(success: () -> (), failure: (NSError) -> ()) {
         
+        self.getHomeTimeline({ (response: AnyObject) -> () in
+            if let allTweets = response as? [NSDictionary] {
+                let tweets = Tweet.tweetsWithArray(allTweets)
+                State.homeTweets = tweets
+                success()
+            }
+
+        }) { (error: NSError) -> () in
+                failure(error)
+        }
+    }
+    
+    func loadMoreHomeTimeline(success: () -> (), failure: (NSError) -> ()) {
+        
+    }
+    
+    func getHomeTimeline(success: (AnyObject) -> (), failure: (NSError) -> ()) {
         self.GET(
             "1.1/statuses/home_timeline.json",
             parameters: nil,
             progress: nil,
             success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-                if let allTweets = response as? [NSDictionary] {
-                    let tweets = Tweet.tweetsWithArray(allTweets)
-                    State.homeTweets = tweets
-                    success()
-                }
-                
+                success(response!)
             }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 failure(error)
         }
+
     }
     
     // -----------------------------------------
