@@ -31,6 +31,9 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var favoriteCount: UILabel!
     
     var data: Tweet?
+    
+    var favorited = false
+    var retweeted = false
 
     // --------------------------------------
     
@@ -62,12 +65,8 @@ class TweetDetailViewController: UIViewController {
             let timeago = NSDate(timeIntervalSinceNow: diff).timeAgoInWords()
             self.tweetTime.text = timeago
         }
-        if let recount = self.data?.retweets {
-            self.retweetCount.text = String(recount)
-        }
-        if let favcount = self.data?.favorites {
-            self.favoriteCount.text = String(favcount)
-        }
+        self.setRetweetsCount()
+        self.setFavoritesCount()
         if let retweeted = self.data?.retweeted {
             if retweeted {
                 if let userName = State.currentUser?.screenName {
@@ -126,9 +125,47 @@ class TweetDetailViewController: UIViewController {
         }
     }
     
+    private func setFavoritesCount() {
+        if let favcount = self.data?.favorites {
+            self.favoriteCount.text = String(favcount)
+        }
+    }
+    
+    private func setRetweetsCount() {
+        if let recount = self.data?.retweets {
+            self.retweetCount.text = String(recount)
+        }
+    }
+
+    @IBAction func onRetweet(sender: AnyObject) {
+        if self.retweeted {
+            self.retweetButton.selected = false
+            self.retweeted = false
+            self.data?.retweets--
+        } else {
+            self.retweetButton.selected = true
+            self.retweeted = true
+            self.data?.retweets++
+        }
+        
+        self.setRetweetsCount()
+    }
+    
+    @IBAction func onFavorite(sender: AnyObject) {
+        if self.favorited {
+            self.favoriteButton.selected = false
+            self.favorited = false
+            self.data?.favorites--
+        } else {
+            self.favoriteButton.selected = true
+            self.favorited = true
+            self.data?.favorites++
+        }
+        self.setFavoritesCount()
+    }
     // --------------------------------------
 
     @IBAction func onReply(sender: AnyObject) {
-        self.performSegueWithIdentifier("ReplySegue", sender: nil)
+    self.performSegueWithIdentifier("ReplySegue", sender: nil)
     }
 }
