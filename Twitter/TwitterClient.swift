@@ -239,6 +239,8 @@ class TwitterClient: BDBOAuth1SessionManager {
         let endpoint = "/1.1/statuses/retweet/\(retweet_id).json"
         let retweetParams = ["id": retweet_id]
         
+        print("trying to retweet");
+        
         self.POST(
             endpoint,
             parameters: retweetParams,
@@ -260,6 +262,8 @@ class TwitterClient: BDBOAuth1SessionManager {
     func unRetweet(retweet_id: Int, success: (Tweet)->()) {
         let endpoint = "/1.1/statuses/unretweet/\(retweet_id).json"
         let retweetParams = ["id": retweet_id]
+        
+        print("trying to unretweet");
         
         self.POST(
             endpoint,

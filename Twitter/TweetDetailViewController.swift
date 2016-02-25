@@ -79,15 +79,19 @@ class TweetDetailViewController: UIViewController {
                     showRetweeted(String(userName))
                 }
                 self.retweetButton.selected = true
+                self.retweeted = true
             } else {
                 self.retweetButton.selected = false
+                self.retweeted = false
             }
         }
         if let favorited = self.data?.favorited {
             if favorited {
                 self.favoriteButton.selected = true
+                self.favorited = true
             } else {
                 self.favoriteButton.selected = false
+                self.favorited = false
             }
         }
     }
